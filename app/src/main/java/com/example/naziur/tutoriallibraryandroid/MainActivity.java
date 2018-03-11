@@ -1,5 +1,6 @@
 package com.example.naziur.tutoriallibraryandroid;
 
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -17,7 +18,10 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
 
+import com.example.naziur.tutoriallibraryandroid.fragment.CategoryFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.ContentFragment;
+import com.example.naziur.tutoriallibraryandroid.fragment.MainFragment;
+import com.example.naziur.tutoriallibraryandroid.utility.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +38,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private List<SlideMenuItem> list = new ArrayList<>();
-    private ContentFragment contentFragment;
+    private MainFragment mainFragment;
     private ViewAnimator viewAnimator;
-    private int res = R.drawable.content_music;
     private LinearLayout linearLayout;
 
 
@@ -44,9 +47,10 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        contentFragment = ContentFragment.newInstance();
+        mainFragment = ContentFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, contentFragment)
+                .replace(R.id.content_frame, mainFragment)
+                .addToBackStack(null)
                 .commit();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
@@ -61,27 +65,27 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
         setActionBar();
         createMenuList();
-        viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, this);
+        viewAnimator = new ViewAnimator<>(this, list, mainFragment, drawerLayout, this);
     }
 
     private void createMenuList() {
-        SlideMenuItem menuItem0 = new SlideMenuItem(ContentFragment.CLOSE, R.drawable.icn_close);
+        SlideMenuItem menuItem0 = new SlideMenuItem(Constants.CLOSE, R.drawable.icn_close);
         list.add(menuItem0);
-        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.BUILDING, R.drawable.ic_tutorial);
+        SlideMenuItem menuItem = new SlideMenuItem(Constants.TUTORIAL, R.drawable.ic_tutorial);
         list.add(menuItem);
-        SlideMenuItem menuItem2 = new SlideMenuItem(ContentFragment.BOOK, R.drawable.ic_category);
+        SlideMenuItem menuItem2 = new SlideMenuItem(Constants.CATEGORY, R.drawable.ic_category);
         list.add(menuItem2);
-        SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.PAINT, R.drawable.ic_my_tutorials);
+        SlideMenuItem menuItem3 = new SlideMenuItem(Constants.MY_TUTORIALS, R.drawable.ic_my_tutorials);
         list.add(menuItem3);
-        SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.CASE, R.drawable.ic_random_tut);
+        SlideMenuItem menuItem4 = new SlideMenuItem(Constants.RANDOM, R.drawable.ic_random_tut);
         list.add(menuItem4);
-        SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.SHOP, R.drawable.ic_about);
+        SlideMenuItem menuItem5 = new SlideMenuItem(Constants.ABOUT, R.drawable.ic_about);
         list.add(menuItem5);
-        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.PARTY, R.drawable.ic_search);
+        SlideMenuItem menuItem6 = new SlideMenuItem(Constants.SEARCH, R.drawable.ic_search);
         list.add(menuItem6);
-        SlideMenuItem menuItem7 = new SlideMenuItem(ContentFragment.MOVIE, R.drawable.ic_settings);
+        SlideMenuItem menuItem7 = new SlideMenuItem(Constants.SETTING, R.drawable.ic_settings);
         list.add(menuItem7);
-        SlideMenuItem menuItem8 = new SlideMenuItem(ContentFragment.MOVIE, R.drawable.ic_feedback);
+        SlideMenuItem menuItem8 = new SlideMenuItem(Constants.FEEDBACK, R.drawable.ic_feedback);
         list.add(menuItem8);
     }
 
@@ -133,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition) {
+    private ScreenShotable replaceFragment(ScreenShotable screenShotable, String selected ,int topPosition) {
 
         View view = findViewById(R.id.content_frame);
         int finalRadius = Math.max(view.getWidth(), view.getHeight());
@@ -144,18 +148,18 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         //findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
         findViewById(R.id.content_overlay).setBackground(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
         animator.start();
-        ContentFragment contentFragment = ContentFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contentFragment).commit();
-        return contentFragment;
+        MainFragment mainFragment = getSelectedFragment(selected);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, mainFragment).addToBackStack(null).commit();
+        return mainFragment;
     }
 
     @Override
     public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
         switch (slideMenuItem.getName()) {
-            case ContentFragment.CLOSE:
+            case Constants.CLOSE:
                 return screenShotable;
             default:
-                return replaceFragment(screenShotable, position);
+                return replaceFragment(screenShotable, slideMenuItem.getName() ,position);
         }
     }
 
@@ -175,6 +179,15 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     @Override
     public void addViewToContainer(View view) {
         linearLayout.addView(view);
+    }
+
+    private MainFragment getSelectedFragment (String itemName) {
+        switch (itemName) {
+            case Constants.CATEGORY :
+                return CategoryFragment.newInstance();
+            default:
+                return ContentFragment.newInstance();
+        }
     }
 }
 
