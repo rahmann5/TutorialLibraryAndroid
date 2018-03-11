@@ -6,13 +6,9 @@ import android.os.Bundle;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
@@ -133,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition) {
-
+    private ScreenShotable replaceFragment(String itemName, ScreenShotable screenShotable, int topPosition) {
+        ScreenshotableFragments contentFragment;
         View view = findViewById(R.id.content_frame);
         int finalRadius = Math.max(view.getWidth(), view.getHeight());
         SupportAnimator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
@@ -144,7 +140,13 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         //findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
         findViewById(R.id.content_overlay).setBackground(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
         animator.start();
-        ContentFragment contentFragment = ContentFragment.newInstance();
+
+        if(itemName.equals(ContentFragment.BUILDING)){
+            contentFragment = TutorialFragment.newInstance();
+        } else {
+            contentFragment = ContentFragment.newInstance();
+        }
+
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contentFragment).commit();
         return contentFragment;
     }
@@ -155,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             case ContentFragment.CLOSE:
                 return screenShotable;
             default:
-                return replaceFragment(screenShotable, position);
+                return replaceFragment(slideMenuItem.getName(), screenShotable, position);
         }
     }
 

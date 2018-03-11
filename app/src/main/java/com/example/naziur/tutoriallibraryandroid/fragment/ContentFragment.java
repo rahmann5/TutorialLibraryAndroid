@@ -27,10 +27,6 @@ public class ContentFragment extends Fragment implements ScreenShotable {
     public static final String PARTY = "Party";
     public static final String MOVIE = "Movie";
 
-    private View containerView;
-
-    private Bitmap bitmap;
-
     public static ContentFragment newInstance() {
         ContentFragment contentFragment = new ContentFragment();
         return contentFragment;
@@ -57,24 +53,12 @@ public class ContentFragment extends Fragment implements ScreenShotable {
 
     @Override
     public void takeScreenShot() {
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                Bitmap bitmap = Bitmap.createBitmap(containerView.getWidth(),
-                        containerView.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-                containerView.draw(canvas);
-                ContentFragment.this.bitmap = bitmap;
-            }
-        };
-
-        thread.start();
 
     }
 
     @Override
     public Bitmap getBitmap() {
-        return bitmap;
+        return null;
     }
 }
 
