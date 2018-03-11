@@ -1,32 +1,27 @@
 package com.example.naziur.tutoriallibraryandroid.fragment;
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.naziur.tutoriallibraryandroid.R;
-
-import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 /**
  * Created by Konstantin on 22.12.2014.
  */
-public class ContentFragment extends MainFragment {
+public class HomeFragment extends MainFragment {
 
 
     private View containerView;
 
     private Bitmap bitmap;
 
-    public static ContentFragment newInstance() {
-        ContentFragment contentFragment = new ContentFragment();
-        return contentFragment;
+    public static HomeFragment newInstance() {
+        HomeFragment homeFragment = new HomeFragment();
+        return homeFragment;
     }
 
     @Override
