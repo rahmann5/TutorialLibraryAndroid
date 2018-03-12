@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.naziur.tutoriallibraryandroid.R;
+import com.example.naziur.tutoriallibraryandroid.TutorialModel;
 import com.example.naziur.tutoriallibraryandroid.adapters.SectionAdapter;
 
 /**
@@ -49,7 +50,7 @@ public class TutorialViewerFragment extends MainFragment {
         // need to use tutorial id to get json file from server
         // on success load data
 
-        tutorialModel = new TutorialModel();
+        //tutorialModel = new TutorialModel();
 
 
     }

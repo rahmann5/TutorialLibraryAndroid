@@ -5,4 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="category_group">#607d8b</color>
     <color name="white">#ffffff</color>
+    <color name="tutorial_title_bg">#f1f1f1</color>
+    <color name="tags_bg">#4caf50</color>
+    <color name="tags_text_colour">#ffffff</color>
+    <color name="tutorial_view_btn_bg">#000000</color>
 </resources>
