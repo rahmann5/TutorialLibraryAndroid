@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import com.example.naziur.tutoriallibraryandroid.fragment.CategoryFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.HomeFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.MainFragment;
+import com.example.naziur.tutoriallibraryandroid.fragment.TutorialsFragment;
 import com.example.naziur.tutoriallibraryandroid.utility.Constants;
 
 import java.util.ArrayList;
@@ -180,6 +181,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         switch (itemName) {
             case Constants.CATEGORY :
                 return CategoryFragment.newInstance();
+            case Constants.TUTORIAL:
+                return TutorialsFragment.newInstance();
             default:
                 return HomeFragment.newInstance();
         }

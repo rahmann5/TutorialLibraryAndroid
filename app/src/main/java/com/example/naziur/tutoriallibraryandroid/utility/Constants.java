@@ -6,7 +6,7 @@ package com.example.naziur.tutoriallibraryandroid.utility;
 
 public class Constants {
     public static final String CLOSE = "Close";
-    public static final String TUTORIAL = "Tutorial";
+    public static final String TUTORIAL = "TutorialModel";
     public static final String CATEGORY = "Category";
     public static final String MY_TUTORIALS = "My Tutorials";
     public static final String RANDOM = "Random";
