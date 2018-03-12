@@ -1,4 +1,4 @@
-package com.example.naziur.tutoriallibraryandroid;
+package com.example.naziur.tutoriallibraryandroid.model;
 
 /**
  * Created by Naziur on 11/03/2018.

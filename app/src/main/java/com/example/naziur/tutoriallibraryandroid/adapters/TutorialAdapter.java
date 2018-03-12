@@ -1,4 +1,4 @@
-package com.example.naziur.tutoriallibraryandroid;
+package com.example.naziur.tutoriallibraryandroid.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.naziur.tutoriallibraryandroid.R;
+import com.example.naziur.tutoriallibraryandroid.model.TutorialModel;
 
 import java.util.ArrayList;
 import java.util.List;

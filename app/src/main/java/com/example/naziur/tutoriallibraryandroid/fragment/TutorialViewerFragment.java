@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.naziur.tutoriallibraryandroid.R;
-import com.example.naziur.tutoriallibraryandroid.TutorialModel;
+import com.example.naziur.tutoriallibraryandroid.model.TutorialModel;
 import com.example.naziur.tutoriallibraryandroid.adapters.SectionAdapter;
 
 /**
