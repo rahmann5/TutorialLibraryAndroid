@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/section_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Heading"
+        android:padding="5dp"
+        android:textSize="25sp"
+        android:textAlignment="center"/>
+
+    <ImageView
+        android:id="@+id/section_img"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:scaleType="center"
+        android:src="@drawable/default_img"
+        />
+
+    <TextView
+        android:id="@+id/section_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Every tutorial will aim to be easy to understand."
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:textSize="18sp"
+        />
+
+</LinearLayout>

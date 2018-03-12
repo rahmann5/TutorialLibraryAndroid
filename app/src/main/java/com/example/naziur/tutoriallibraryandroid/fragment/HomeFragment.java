@@ -43,15 +43,5 @@ public class HomeFragment extends MainFragment {
         return rootView;
     }
 
-    @Override
-    public void takeScreenShot() {
-
-
-    }
-
-    @Override
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
 }
 
