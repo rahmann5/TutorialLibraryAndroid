@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ import android.widget.LinearLayout;
 import com.example.naziur.tutoriallibraryandroid.fragment.CategoryFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.HomeFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.MainFragment;
+import com.example.naziur.tutoriallibraryandroid.fragment.SearchFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.TutorialsFragment;
 import com.example.naziur.tutoriallibraryandroid.utility.Constants;
 
@@ -67,8 +69,10 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(Constants.CLOSE, R.drawable.icn_close);
         list.add(menuItem0);
-        SlideMenuItem menuItem = new SlideMenuItem(Constants.TUTORIAL, R.drawable.ic_tutorial);
+        SlideMenuItem menuItem = new SlideMenuItem(Constants.HOME, R.drawable.ic_home);
         list.add(menuItem);
+        SlideMenuItem menuItem1 = new SlideMenuItem(Constants.TUTORIAL, R.drawable.ic_tutorial);
+        list.add(menuItem1);
         SlideMenuItem menuItem2 = new SlideMenuItem(Constants.CATEGORY, R.drawable.ic_category);
         list.add(menuItem2);
         SlideMenuItem menuItem3 = new SlideMenuItem(Constants.MY_TUTORIALS, R.drawable.ic_my_tutorials);
@@ -84,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         SlideMenuItem menuItem8 = new SlideMenuItem(Constants.FEEDBACK, R.drawable.ic_feedback);
         list.add(menuItem8);
     }
-
 
     private void setActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -181,8 +184,12 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         switch (itemName) {
             case Constants.CATEGORY :
                 return CategoryFragment.newInstance();
+            case Constants.HOME:
+                return MainFragment.newInstance();
             case Constants.TUTORIAL:
                 return TutorialsFragment.newInstance();
+            case Constants.SEARCH:
+                return SearchFragment.newInstance();
             default:
                 return HomeFragment.newInstance();
         }
