@@ -5,7 +5,7 @@ package com.example.naziur.tutoriallibraryandroid.utility;
  */
 
 public class ServerRequestManager {
-    private static final String END_POINT = "https://tutoriallibrary.000webhostapp.com/app_request/process_request/";
+    private static final String END_POINT = "https://tutoriallibrary.000webhostapp.com/apicall/process_request/";
     private static final String APP_KEY = "c4ca4238a0b923820dcc509a6f75849b";
 
     private static OnRequestCompleteListener onRequestCompleteListener;
