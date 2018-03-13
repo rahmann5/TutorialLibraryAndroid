@@ -1,7 +1,13 @@
 package com.example.naziur.tutoriallibraryandroid.fragment;
 
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.naziur.tutoriallibraryandroid.R;
 
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
@@ -11,8 +17,21 @@ import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 public class MainFragment extends Fragment implements ScreenShotable {
 
+    public MainFragment() {
+        // Required empty public constructor
+    }
+
     public static MainFragment newInstance(){
-        return null;
+        MainFragment mainFragment = new MainFragment();
+        return mainFragment;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_main, container, false);
+
+        return v;
     }
 
     @Override
