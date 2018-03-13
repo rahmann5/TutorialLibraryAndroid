@@ -21,11 +21,12 @@ import com.example.naziur.tutoriallibraryandroid.model.SectionModel;
 import com.example.naziur.tutoriallibraryandroid.model.TagModel;
 import com.example.naziur.tutoriallibraryandroid.model.TutorialModel;
 import com.example.naziur.tutoriallibraryandroid.adapters.SectionAdapter;
+import com.example.naziur.tutoriallibraryandroid.utility.ServerRequestManager;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TutorialViewerFragment extends MainFragment {
+public class TutorialViewerFragment extends MainFragment implements ServerRequestManager.OnRequestCompleteListener{
 
     private RecyclerView sectionRecyclerView, tagsRecyclerView, referenceRecyclerView;
     private SectionAdapter sectionAdapter;
@@ -45,6 +46,9 @@ public class TutorialViewerFragment extends MainFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        ServerRequestManager.setOnRequestCompleteListener(this);
+        ServerRequestManager.getTutorial(getActivity(), "1");
         loadData ();
 
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(tutorialModel.getTitle());
@@ -102,4 +106,13 @@ public class TutorialViewerFragment extends MainFragment {
 
     }
 
+    @Override
+    public void onSuccessfulRequestListener(String command, String... s) {
+        System.out.print(s[0]);
+    }
+
+    @Override
+    public void onFailedRequestListener(String command, String... s) {
+        System.out.print(s[0]);
+    }
 }
