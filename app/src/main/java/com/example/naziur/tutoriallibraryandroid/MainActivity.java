@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import com.example.naziur.tutoriallibraryandroid.fragment.CategoryFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.HomeFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.MainFragment;
+import com.example.naziur.tutoriallibraryandroid.fragment.TutorialViewerFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.TutorialsFragment;
 import com.example.naziur.tutoriallibraryandroid.utility.Constants;
 
@@ -183,6 +184,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 return CategoryFragment.newInstance();
             case Constants.TUTORIAL:
                 return TutorialsFragment.newInstance();
+            case Constants.RANDOM:
+                return TutorialViewerFragment.newInstance();
             default:
                 return HomeFragment.newInstance();
         }

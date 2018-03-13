@@ -10,7 +10,10 @@ public class SectionModel {
     private String detail;
     private String image;
 
-    public SectionModel() {
+    public SectionModel(String heading, String detail, String image) {
+        this.heading = heading;
+        this.detail = detail;
+        this.image = image;
     }
 
     public String getHeading() {

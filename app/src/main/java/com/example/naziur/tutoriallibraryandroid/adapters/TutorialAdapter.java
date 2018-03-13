@@ -74,10 +74,10 @@ public class TutorialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             introTv.setText(tutorialModel.getIntro());
             createdTv.setText(tutorialModel.getCreatedAtDate());
             Glide.with(context).load(tutorialModel.getIntroImageUrl()).into(introIv);
-            tagOneTv.setText(tutorialModel.getTags()[0]);
+            tagOneTv.setText(tutorialModel.getTags()[0].getTagName());
             tagOneTv.setVisibility(View.VISIBLE);
             if(tutorialModel.getTags().length > 1){
-                tagTwoTv.setText(tutorialModel.getTags()[1]);
+                tagTwoTv.setText(tutorialModel.getTags()[1].getTagName());
                 tagTwoTv.setVisibility(View.VISIBLE);
             }
         }

@@ -9,4 +9,5 @@
     <color name="tags_bg">#4caf50</color>
     <color name="tags_text_colour">#ffffff</color>
     <color name="tutorial_view_btn_bg">#000000</color>
+    <color name="tutorial_viewer_bg">#b6b4b4</color>
 </resources>

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.naziur.tutoriallibraryandroid.R;
 import com.example.naziur.tutoriallibraryandroid.model.CategoryModel;
 import com.example.naziur.tutoriallibraryandroid.model.SectionModel;
@@ -58,7 +59,7 @@ public class SectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         void bind (Context context, SectionModel sectionModel) {
             sectionHeading.setText(sectionModel.getHeading());
             sectionDetail.setText(sectionModel.getDetail());
-            //sectionImg.setText(sectionModel.getImage());
+            Glide.with(context).load(sectionModel.getImage()).into(sectionImg);
         }
     }
 }

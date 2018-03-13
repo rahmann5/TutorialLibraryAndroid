@@ -7,15 +7,23 @@ package com.example.naziur.tutoriallibraryandroid.model;
 public class TutorialModel {
 
     private String title, author, intro, introImageUrl, createdAtDate;
-    private String[] tags;
+    private TagModel[] tags;
+    private SectionModel[] sections;
+    private String[] references;
 
-    public TutorialModel(String title, String author, String intro, String introImageUrl, String createdAtDate, String[] tags) {
+    public TutorialModel(String title, String author, String intro, String introImageUrl, String createdAtDate, TagModel[] tags) {
         this.title = title;
         this.author = author;
         this.intro = intro;
         this.introImageUrl = introImageUrl;
         this.createdAtDate = createdAtDate;
         this.tags = tags;
+    }
+
+    public TutorialModel (String title, String author, String intro, String introImageUrl, String createdAtDate, TagModel[] tags, SectionModel[] sections, String[] references) {
+        this(title, author, intro, introImageUrl, createdAtDate, tags);
+        this.sections = sections;
+        this.references = references;
     }
 
     public String getTitle() {
@@ -38,7 +46,15 @@ public class TutorialModel {
         return createdAtDate;
     }
 
-    public String[] getTags() {
+    public TagModel[] getTags() {
         return tags;
+    }
+
+    public SectionModel[] getSections() {
+        return sections;
+    }
+
+    public String[] getReferences() {
+        return references;
     }
 }

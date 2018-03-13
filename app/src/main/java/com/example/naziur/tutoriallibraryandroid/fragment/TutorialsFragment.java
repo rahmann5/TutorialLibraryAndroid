@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.naziur.tutoriallibraryandroid.R;
+import com.example.naziur.tutoriallibraryandroid.model.TagModel;
 import com.example.naziur.tutoriallibraryandroid.model.TutorialModel;
 import com.example.naziur.tutoriallibraryandroid.adapters.TutorialAdapter;
 
@@ -38,8 +39,8 @@ public class TutorialsFragment extends MainFragment {
         RecyclerView mRecyclerView = rootView.findViewById(R.id.tutorials_recycle_view);
 
         List<TutorialModel> data = new ArrayList<>();
-        data.add(new TutorialModel("A test title", "Mr Author", "A short intro for test", "http://tutoriallibrary.000webhostapp.com/assets/images/tutorials/10/intro-image.jpg", "08/12/1874", new String[]{"Lifestyle"}));
-        data.add(new TutorialModel("A test title2", "Mr Author", "Another short intro for test", "http://tutoriallibrary.000webhostapp.com/assets/images/tutorials/17/intro-image.jpg", "08/01/1874", new String[]{"Lifestyle", "Android"}));
+        data.add(new TutorialModel("A test title", "Mr Author", "A short intro for test", "http://tutoriallibrary.000webhostapp.com/assets/images/tutorials/10/intro-image.jpg", "08/12/1874", new TagModel[]{new TagModel("Lifestyle", "3")}));
+        data.add(new TutorialModel("A test title2", "Mr Author", "Another short intro for test", "http://tutoriallibrary.000webhostapp.com/assets/images/tutorials/17/intro-image.jpg", "08/01/1874", new TagModel[]{new TagModel("Lifestyle", "3"), new TagModel("Android", "1")}));
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
