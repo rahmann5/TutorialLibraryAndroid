@@ -15,4 +15,9 @@ public class Constants {
     public static final String SEARCH = "Search";
     public static final String SETTING = "Setting";
     public static final String FEEDBACK = "Feedback";
+
+    public static final String FRAGMENT_KEY_TUT_ID = "tut_id";
+
+    public static final String ASSETS_URL_IMG_DIR = "http://tutoriallibrary.000webhostapp.com/assets/images/";
+    public static final String ASSETS_URL_IMG_DEFULT = "http://tutoriallibrary.000webhostapp.com/assets/images/default/";
 }

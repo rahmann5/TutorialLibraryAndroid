@@ -150,10 +150,12 @@
             >
 
             <Button
+                android:visibility="gone"
+                android:id="@+id/online_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="See Online"
-                android:background="@color/white"/>
+                android:background="?attr/selectableItemBackground"/>
 
         </android.support.v7.widget.CardView>
 
