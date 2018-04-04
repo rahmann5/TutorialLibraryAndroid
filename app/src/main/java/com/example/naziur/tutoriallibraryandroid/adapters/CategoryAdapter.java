@@ -22,23 +22,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context context;
 
     public CategoryAdapter (Context context) {
+        categoryData = new ArrayList<>();
         this.context = context;
-        loadCategoryData ();
     }
 
-    private void loadCategoryData () {
-        categoryData = new ArrayList<>();
-        categoryData.add(new CategoryModel("A"));
-        categoryData.add(new CategoryModel("Android", "1"));
-        categoryData.add(new CategoryModel("A.I", "2"));
-        categoryData.add(new CategoryModel("Anti-Matter", "3"));
-        categoryData.add(new CategoryModel("Animals", "4"));
-        categoryData.add(new CategoryModel("B"));
-        categoryData.add(new CategoryModel("BobScript", "5"));
-        categoryData.add(new CategoryModel("Building", "6"));
-        categoryData.add(new CategoryModel("D"));
-        categoryData.add(new CategoryModel("Data", "7"));
-        categoryData.add(new CategoryModel("Data Mining", "8"));
+    public void setCategoryData(ArrayList<CategoryModel> tagData) {
+        categoryData = tagData;
+        notifyDataSetChanged();
     }
 
     @Override

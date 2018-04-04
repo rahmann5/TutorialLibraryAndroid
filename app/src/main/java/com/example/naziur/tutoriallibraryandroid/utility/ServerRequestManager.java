@@ -19,11 +19,14 @@ import java.util.Map;
  */
 
 public class ServerRequestManager {
-    private static final String END_POINT = "http://tutoriallibrary.000webhostapp.com/apicall/";
+    private static final String END_POINT = "https://tutoriallibrary.000webhostapp.com/apicall/";
     private static final String APP_KEY = "c4ca4238a0b923820dcc509a6f75849b";
 
     private static final String APP_VALUE = "app_key";
+
+    public static final String COMMAND_All_TAGS = "get_all_tags";
     public static final String COMMAND_GET_ALL_TUTORIALS = "get_all_tutorials";
+    public static final String COMMAND_SINGLE_TUTORIAL = "get_a_tutorial";
 
     private static OnRequestCompleteListener onRequestCompleteListener;
 
@@ -41,15 +44,15 @@ public class ServerRequestManager {
     }
 
     public static void getTutorial (Context context, final String tutorialId) {
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, END_POINT + "tutorial", new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, END_POINT + COMMAND_SINGLE_TUTORIAL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                onRequestCompleteListener.onSuccessfulRequestListener("tutorial", response);
+                onRequestCompleteListener.onSuccessfulRequestListener(COMMAND_SINGLE_TUTORIAL, response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                onRequestCompleteListener.onFailedRequestListener("tutorial", error.getMessage());
+                onRequestCompleteListener.onFailedRequestListener(COMMAND_SINGLE_TUTORIAL, error.toString());
             }
         }
         ) {
@@ -58,6 +61,30 @@ public class ServerRequestManager {
                 Map<String, String> params = new Hashtable<String, String>();
                 params.put(APP_VALUE, APP_KEY);
                 params.put("tutorial_id", tutorialId);
+                return params;
+            }
+        };
+
+        createRequest(stringRequest, context);
+    }
+
+    public static void getAllTags (Context context) {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, END_POINT + COMMAND_All_TAGS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                onRequestCompleteListener.onSuccessfulRequestListener(COMMAND_All_TAGS, response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                onRequestCompleteListener.onFailedRequestListener(COMMAND_All_TAGS, error.toString());
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new Hashtable<String, String>();
+                params.put(APP_VALUE, APP_KEY);
                 return params;
             }
         };

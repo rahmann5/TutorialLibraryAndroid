@@ -9,8 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.naziur.tutoriallibraryandroid.MainActivity;
@@ -21,7 +23,19 @@ import com.example.naziur.tutoriallibraryandroid.model.SectionModel;
 import com.example.naziur.tutoriallibraryandroid.model.TagModel;
 import com.example.naziur.tutoriallibraryandroid.model.TutorialModel;
 import com.example.naziur.tutoriallibraryandroid.adapters.SectionAdapter;
+import com.example.naziur.tutoriallibraryandroid.utility.Constants;
 import com.example.naziur.tutoriallibraryandroid.utility.ServerRequestManager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
+
+import static com.example.naziur.tutoriallibraryandroid.utility.Constants.ASSETS_URL_IMG_DEFULT;
+import static com.example.naziur.tutoriallibraryandroid.utility.Constants.ASSETS_URL_IMG_DIR;
+import static com.example.naziur.tutoriallibraryandroid.utility.Constants.FRAGMENT_KEY_TUT_ID;
+import static com.example.naziur.tutoriallibraryandroid.utility.Constants.RANDOM;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +47,8 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
     private TagsAdapter tagsAdapter;
     private ReferenceAdapter refsAdapter;
     private TutorialModel tutorialModel;
+    private View view;
+    private Button onlineButton;
 
     public TutorialViewerFragment() {
         // Required empty public constructor
@@ -47,29 +63,32 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        view = inflater.inflate(R.layout.fragment_tutorial_viewer, container, false);
         ServerRequestManager.setOnRequestCompleteListener(this);
-        ServerRequestManager.getTutorial(getActivity(), "1");
-        loadData ();
-
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(tutorialModel.getTitle());
-
-        View view = inflater.inflate(R.layout.fragment_tutorial_viewer, container, false);
-
-        ((TextView) view.findViewById(R.id.tutorial_author)).setText("By: " + tutorialModel.getAuthor());
-        ((TextView) view.findViewById(R.id.tutorial_date)).setText(tutorialModel.getCreatedAtDate());
-        ((TextView) view.findViewById(R.id.tutorial_intro)).setText(tutorialModel.getIntro());
-        Glide.with(getActivity()).load(tutorialModel.getIntroImageUrl()).into(((ImageView) view.findViewById(R.id.tutorial_intro_img)));
+        // need to receive bundal extra
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            ServerRequestManager.getTutorial(getActivity(), bundle.getString(FRAGMENT_KEY_TUT_ID));
+        }
 
         sectionRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tutorial_section_viewer);
         tagsRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tutorial_tags);
         referenceRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tutorial_refs);
-        setUpRecyclerViews();
+        onlineButton = (Button) view.findViewById(R.id.online_btn);
+
+        onlineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), tutorialModel.getTitle() , Toast.LENGTH_LONG).show();
+            }
+        });
+
         return view;
     }
 
     private void setUpRecyclerViews () {
-        sectionAdapter = new SectionAdapter(getActivity(), tutorialModel.getSections());
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        sectionAdapter = new SectionAdapter(getActivity(), tutorialModel.getSections());
         sectionRecyclerView.setLayoutManager(mLayoutManager);
         sectionRecyclerView.setAdapter(sectionAdapter);
         sectionRecyclerView.setNestedScrollingEnabled(false);
@@ -81,8 +100,8 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
         tagsRecyclerView.setHasFixedSize(true);
         tagsRecyclerView.setAdapter(tagsAdapter);
 
-        refsAdapter = new ReferenceAdapter(getActivity(), tutorialModel.getReferences());
         LinearLayoutManager refLayoutManager = new LinearLayoutManager(getActivity());
+        refsAdapter = new ReferenceAdapter(getActivity(), tutorialModel.getReferences());
         referenceRecyclerView.setLayoutManager(refLayoutManager);
         referenceRecyclerView.setAdapter(refsAdapter);
         referenceRecyclerView.setNestedScrollingEnabled(false);
@@ -90,29 +109,77 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
         referenceRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
     }
 
-    private void loadData () {
-        // get the extra bundle called the tutorial id
-        // need to use tutorial id to get json file from server
-        // on success load data
+    private void loadData (String jsonString) {
+        String title = "";
+        String author = "";
+        String intro = "";
+        String created = "Unknown";
+        String intro_img = ASSETS_URL_IMG_DEFULT + "default_img.jpg";
+        SectionModel [] allSections = new SectionModel[0];
+        TagModel [] allTags = new TagModel[0];
+        String [] allRefs = new String [0];
+        try {
+            JSONObject tutorialJson = new JSONObject(jsonString);
+            title = tutorialJson.getString("title");
+            author = tutorialJson.getString("author");
+            intro = tutorialJson.getString("intro");
+            created = tutorialJson.getString("created");
+            intro_img = ASSETS_URL_IMG_DIR + tutorialJson.getString("intro_img");
+            JSONArray segments = tutorialJson.getJSONArray("segments");
+            allSections = new SectionModel[segments.length()];
+            for (int i = 0; i < segments.length(); i++) {
+                JSONObject segmentObj = segments.getJSONObject(i);
+                allSections[i] = new SectionModel(segmentObj.getString("heading"), segmentObj.getString("paragraph"), ASSETS_URL_IMG_DIR + segmentObj.getString("image"));
+            }
+            JSONArray tags = tutorialJson.getJSONArray("tags");
+            allTags =  new TagModel[tags.length()];
+            for (int i = 0; i < tags.length(); i++) {
+                JSONObject tag = tags.getJSONObject(i);
+                Iterator keys = tag.keys();
+                if (keys.hasNext()) {
+                    String key = (String)keys.next();
+                    allTags[i] = new TagModel(tag.getString(key), key);
+                }
+            }
 
-        SectionModel [] allSections = new SectionModel[2];
-        allSections[0] = new SectionModel("Header 1", "Section 1 information", "http://tutoriallibrary.000webhostapp.com/assets/images/tutorials/10/1.jpg");
-        allSections[1] = new SectionModel("Header 2", "Section 2 information", "http://tutoriallibrary.000webhostapp.com/assets/images/tutorials/10/2.png");
+            JSONArray refs = tutorialJson.getJSONArray("references");
+            allRefs = new String[refs.length()];
+            for (int i = 0 ; i < refs.length(); i++) {
+                allRefs[i] = refs.getString(i);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        TagModel [] allTags = new TagModel[]{new TagModel("Lifestyle", "3"), new TagModel("Android", "1")};
-        String [] allRefs = new String [] {"Barroth ecology", "Book of lies", "This book plagiarises"};
+        tutorialModel = new TutorialModel(title, author, intro, intro_img, created, allTags, allSections, allRefs);
+        displayTutorial();
+        setUpRecyclerViews();
+    }
 
-        tutorialModel = new TutorialModel("A test title", "Mr Author", "A short intro for test", "http://tutoriallibrary.000webhostapp.com/assets/images/tutorials/10/intro-image.jpg", "08/12/1874", allTags, allSections, allRefs);
-
+    private void displayTutorial () {
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(tutorialModel.getTitle());
+        ((TextView) view.findViewById(R.id.tutorial_author)).setText("By: " + tutorialModel.getAuthor());
+        ((TextView) view.findViewById(R.id.tutorial_date)).setText(tutorialModel.getCreatedAtDate());
+        ((TextView) view.findViewById(R.id.tutorial_intro)).setText(tutorialModel.getIntro());
+        Glide.with(getActivity()).load(tutorialModel.getIntroImageUrl()).into(((ImageView) view.findViewById(R.id.tutorial_intro_img)));
     }
 
     @Override
     public void onSuccessfulRequestListener(String command, String... s) {
-        System.out.print(s[0]);
+        switch (command) {
+            case ServerRequestManager.COMMAND_SINGLE_TUTORIAL :
+                loadData(s[0]);
+                onlineButton.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     @Override
     public void onFailedRequestListener(String command, String... s) {
-        System.out.print(s[0]);
+        switch (command) {
+            case ServerRequestManager.COMMAND_SINGLE_TUTORIAL :
+                Toast.makeText(getActivity(), "ERROR " + s[0], Toast.LENGTH_LONG).show();
+                break;
+        }
     }
 }

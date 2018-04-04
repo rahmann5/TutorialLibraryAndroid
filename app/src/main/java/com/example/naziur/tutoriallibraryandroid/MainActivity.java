@@ -190,7 +190,11 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             case Constants.TUTORIAL:
                 return TutorialsFragment.newInstance();
             case Constants.RANDOM:
-                return TutorialViewerFragment.newInstance();
+                MainFragment fragment = TutorialViewerFragment.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putString(Constants.FRAGMENT_KEY_TUT_ID, Constants.RANDOM);
+                fragment.setArguments(bundle);
+                return fragment;
             case Constants.SEARCH:
                 return SearchFragment.newInstance();
             default:
