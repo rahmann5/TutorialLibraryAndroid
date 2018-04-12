@@ -63,10 +63,6 @@ public class TutorialsFragment extends MainFragment implements ServerRequestMana
                     Fragment fragment = new TutorialViewerFragment();
                     switchFragment(fragment, args);
                 } else {
-                    /*Bundle args = new Bundle();
-                    args.putString(Constants.FRAGMENT_KEY_TAG_ID, id);
-                    Fragment fragment = new TutorialsFragment();
-                    switchFragment(fragment, args);*/
                     tagId = id;
                     Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.content_frame);
                     if (currentFragment instanceof TutorialsFragment) {

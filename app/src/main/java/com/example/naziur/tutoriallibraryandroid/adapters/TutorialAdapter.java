@@ -49,7 +49,7 @@ public class TutorialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tutorials_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_tutorials, parent, false);
         return new TutorialViewHolder(view);
     }
 
@@ -78,8 +78,6 @@ public class TutorialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             titleTv = (TextView) view.findViewById(R.id.title_tv);
             introWv = (WebView) view.findViewById(R.id.intro_wv);
             createdTv = (TextView) view.findViewById(R.id.created_tv);
-            //tagOneTv = (TextView) view.findViewById(R.id.tag_one_tv);
-            //tagTwoTv = (TextView) view.findViewById(R.id.tag_two_tv);
             introIv = (ImageView) view.findViewById(R.id.intro_image);
             viewTutBtn = (Button) view.findViewById(R.id.view_tut_btn);
             linearLayout = (LinearLayout) view.findViewById(R.id.tag_container);
@@ -90,19 +88,6 @@ public class TutorialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             introWv.loadData(tutorialModel.getIntro(), "text/html; charset=utf-8", "UTF-8");
             createdTv.setText(tutorialModel.getCreatedAtDate());
             Glide.with(context).load(tutorialModel.getIntroImageUrl()).into(introIv);
-            /*tagOneTv.setText(tutorialModel.getTags()[0].getTagName());
-            tagOneTv.setVisibility(View.VISIBLE);
-            if(tutorialModel.getTags().length > 1){
-                tagTwoTv.setText(tutorialModel.getTags()[1].getTagName());
-                tagTwoTv.setVisibility(View.VISIBLE);
-
-                tagTwoTv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        listener.onViewClick(false, tutorialModel.getTags()[1].getTagId());
-                    }
-                });
-            }*/
             final TextView[] tv = new TextView[tutorialModel.getTags().length];
             for(int i = 0; i < tutorialModel.getTags().length; i++){
                 tv[i] = new TextView(context);
@@ -128,7 +113,7 @@ public class TutorialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewTutBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onViewClick(true, tutorialModel.getTutorial_id());
+                    listener.onViewClick(true, tutorialModel.getId());
                 }
             });
         }
