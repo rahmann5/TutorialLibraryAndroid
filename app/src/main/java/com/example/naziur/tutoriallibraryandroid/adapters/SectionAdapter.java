@@ -5,12 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.naziur.tutoriallibraryandroid.R;
-import com.example.naziur.tutoriallibraryandroid.model.CategoryModel;
 import com.example.naziur.tutoriallibraryandroid.model.SectionModel;
 
 /**
@@ -46,19 +46,20 @@ public class SectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private static class SectionHolder extends RecyclerView.ViewHolder {
 
-        private TextView sectionHeading, sectionDetail;
+        private TextView sectionHeading;
+        private WebView sectionDetail;
         private ImageView sectionImg;
 
         public SectionHolder(View itemView) {
             super(itemView);
             sectionHeading = (TextView) itemView.findViewById(R.id.section_heading);
-            sectionDetail = (TextView) itemView.findViewById(R.id.section_detail);
+            sectionDetail = (WebView) itemView.findViewById(R.id.section_detail);
             sectionImg = (ImageView) itemView.findViewById(R.id.section_img);
         }
 
         void bind (Context context, SectionModel sectionModel) {
             sectionHeading.setText(sectionModel.getHeading());
-            sectionDetail.setText(sectionModel.getDetail());
+            sectionDetail.loadDataWithBaseURL(null, sectionModel.getDetail(), "text/html", "utf-8", null);
             Glide.with(context).load(sectionModel.getImage()).into(sectionImg);
         }
     }

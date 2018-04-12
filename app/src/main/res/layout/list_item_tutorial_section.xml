@@ -10,7 +10,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/section_heading"
@@ -29,15 +29,12 @@
             android:src="@drawable/default_img"
             />
 
-        <TextView
+        <WebView
             android:id="@+id/section_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Every tutorial will aim to be easy to understand."
             android:textAlignment="center"
             android:padding="5dp"
-            android:textSize="18sp"
-            />
-
+            android:textSize="18sp"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

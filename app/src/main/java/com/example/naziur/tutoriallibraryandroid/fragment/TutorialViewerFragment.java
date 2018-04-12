@@ -1,6 +1,8 @@
 package com.example.naziur.tutoriallibraryandroid.fragment;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -9,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,11 +22,11 @@ import com.example.naziur.tutoriallibraryandroid.MainActivity;
 import com.example.naziur.tutoriallibraryandroid.R;
 import com.example.naziur.tutoriallibraryandroid.adapters.ReferenceAdapter;
 import com.example.naziur.tutoriallibraryandroid.adapters.TagsAdapter;
+import com.example.naziur.tutoriallibraryandroid.database.TutorialDBHelper;
 import com.example.naziur.tutoriallibraryandroid.model.SectionModel;
 import com.example.naziur.tutoriallibraryandroid.model.TagModel;
 import com.example.naziur.tutoriallibraryandroid.model.TutorialModel;
 import com.example.naziur.tutoriallibraryandroid.adapters.SectionAdapter;
-import com.example.naziur.tutoriallibraryandroid.utility.Constants;
 import com.example.naziur.tutoriallibraryandroid.utility.ServerRequestManager;
 
 import org.json.JSONArray;
@@ -35,7 +38,6 @@ import java.util.Iterator;
 import static com.example.naziur.tutoriallibraryandroid.utility.Constants.ASSETS_URL_IMG_DEFULT;
 import static com.example.naziur.tutoriallibraryandroid.utility.Constants.ASSETS_URL_IMG_DIR;
 import static com.example.naziur.tutoriallibraryandroid.utility.Constants.FRAGMENT_KEY_TUT_ID;
-import static com.example.naziur.tutoriallibraryandroid.utility.Constants.RANDOM;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +51,9 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
     private TutorialModel tutorialModel;
     private View view;
     private Button onlineButton;
+    private ImageView favButton;
+
+    private TutorialDBHelper tutorialDb;
 
     public TutorialViewerFragment() {
         // Required empty public constructor
@@ -65,6 +70,7 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
 
         view = inflater.inflate(R.layout.fragment_tutorial_viewer, container, false);
         ServerRequestManager.setOnRequestCompleteListener(this);
+        tutorialDb = new TutorialDBHelper(getContext());
         // need to receive bundal extra
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -75,11 +81,34 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
         tagsRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tutorial_tags);
         referenceRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tutorial_refs);
         onlineButton = (Button) view.findViewById(R.id.online_btn);
+        favButton = (ImageView) view.findViewById(R.id.fav_btn);
+        favButton.setEnabled(false);
 
         onlineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), tutorialModel.getTitle() , Toast.LENGTH_LONG).show();
+            Uri tutorialPage = Uri.parse(ServerRequestManager.SERVER_URL+"/tutorial/page/"+tutorialModel.getId());
+            Intent intent = new Intent(Intent.ACTION_VIEW, tutorialPage);
+            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivity(intent);
+            }
+            }
+        });
+
+        favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            if (favButton.getTag().equals(getResources().getString(R.string.unfav_tut))) {
+                favButton.setEnabled(false);
+                long id = tutorialDb.insertFavTutorial(Integer.parseInt(tutorialModel.getId()), tutorialModel.getTitle(), tutorialModel.getAuthor());
+                updateFavIcon(id != -1); // true then update as now fav tutorial
+                favButton.setEnabled(true);
+            } else {
+                favButton.setEnabled(false);
+                int effectedRows = tutorialDb.removeFavTutorial(tutorialModel.getId());
+                updateFavIcon(!(effectedRows > 0)); // true no longer tut is fav, but false to allow for unfav icon to be set
+                favButton.setEnabled(true);
+            }
             }
         });
 
@@ -110,6 +139,7 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
     }
 
     private void loadData (String jsonString) {
+        String id = "";
         String title = "";
         String author = "";
         String intro = "";
@@ -120,6 +150,7 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
         String [] allRefs = new String [0];
         try {
             JSONObject tutorialJson = new JSONObject(jsonString);
+            id = tutorialJson.getString("id");
             title = tutorialJson.getString("title");
             author = tutorialJson.getString("author");
             intro = tutorialJson.getString("intro");
@@ -151,25 +182,30 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
             e.printStackTrace();
         }
 
-        tutorialModel = new TutorialModel(title, author, intro, intro_img, created, allTags, allSections, allRefs);
+        tutorialModel = new TutorialModel(id, title, author, intro, intro_img, created, allTags, allSections, allRefs);
         displayTutorial();
         setUpRecyclerViews();
     }
 
     private void displayTutorial () {
+        updateFavIcon(tutorialDb.isFavorite(tutorialModel.getId()));
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(tutorialModel.getTitle());
         ((TextView) view.findViewById(R.id.tutorial_author)).setText("By: " + tutorialModel.getAuthor());
         ((TextView) view.findViewById(R.id.tutorial_date)).setText(tutorialModel.getCreatedAtDate());
-        ((TextView) view.findViewById(R.id.tutorial_intro)).setText(tutorialModel.getIntro());
+        ((WebView) view.findViewById(R.id.tutorial_intro)).loadDataWithBaseURL(null, tutorialModel.getIntro(), "text/html", "utf-8", null);
         Glide.with(getActivity()).load(tutorialModel.getIntroImageUrl()).into(((ImageView) view.findViewById(R.id.tutorial_intro_img)));
+
     }
 
     @Override
     public void onSuccessfulRequestListener(String command, String... s) {
         switch (command) {
             case ServerRequestManager.COMMAND_SINGLE_TUTORIAL :
-                loadData(s[0]);
-                onlineButton.setVisibility(View.VISIBLE);
+                if (getActivity() != null)  {
+                    loadData(s[0]);
+                    onlineButton.setVisibility(View.VISIBLE);
+                    favButton.setEnabled(true);
+                }
                 break;
         }
     }
@@ -181,5 +217,22 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
                 Toast.makeText(getActivity(), "ERROR " + s[0], Toast.LENGTH_LONG).show();
                 break;
         }
+    }
+
+    private void updateFavIcon (boolean fav) {
+        int icon = R.drawable.ic_unfavorite;
+        int tag = R.string.unfav_tut;
+        if (fav) {
+            icon = R.drawable.ic_favorite;
+            tag = R.string.fav_tut;
+        }
+        Glide.with(getActivity()).load(icon).into(favButton);
+        favButton.setTag(getResources().getString(tag));
+    }
+
+    @Override
+    public void onDestroy() {
+        tutorialDb.close();
+        super.onDestroy();
     }
 }

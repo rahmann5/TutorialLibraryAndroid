@@ -14,6 +14,13 @@
     <string name="search_hint">Search here...</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="fav_tut">Fav</string>
+    <string name="unfav_tut">UnFav</string>
+
+    <!-- Remove glide dependency from setTag of ImageView -->
+    <item name="glide_tag" type="id" />
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

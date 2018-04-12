@@ -19,7 +19,9 @@ import java.util.Map;
  */
 
 public class ServerRequestManager {
-    private static final String END_POINT = "https://tutoriallibrary.000webhostapp.com/apicall/";
+    public static final String SERVER_URL = "https://tutoriallibrary.000webhostapp.com";
+    private static final String END_POINT = SERVER_URL+"/apicall/";
+
     private static final String APP_KEY = "c4ca4238a0b923820dcc509a6f75849b";
 
     private static final String APP_VALUE = "app_key";

@@ -6,7 +6,7 @@ package com.example.naziur.tutoriallibraryandroid.model;
 
 public class TutorialModel {
 
-    private String title, author, intro, introImageUrl, createdAtDate;
+    private String id, title, author, intro, introImageUrl, createdAtDate;
     private TagModel[] tags;
     private SectionModel[] sections;
     private String[] references;
@@ -20,8 +20,9 @@ public class TutorialModel {
         this.tags = tags;
     }
 
-    public TutorialModel (String title, String author, String intro, String introImageUrl, String createdAtDate, TagModel[] tags, SectionModel[] sections, String[] references) {
+    public TutorialModel (String id, String title, String author, String intro, String introImageUrl, String createdAtDate, TagModel[] tags, SectionModel[] sections, String[] references) {
         this(title, author, intro, introImageUrl, createdAtDate, tags);
+        this.id = id;
         this.sections = sections;
         this.references = references;
     }
@@ -56,5 +57,9 @@ public class TutorialModel {
 
     public String[] getReferences() {
         return references;
+    }
+
+    public String getId() {
+        return id;
     }
 }

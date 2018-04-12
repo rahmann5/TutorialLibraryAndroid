@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import com.example.naziur.tutoriallibraryandroid.fragment.CategoryFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.HomeFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.MainFragment;
+import com.example.naziur.tutoriallibraryandroid.fragment.SavedTutorialFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.TutorialViewerFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.SearchFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.TutorialsFragment;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         mainFragment = HomeFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, mainFragment)
-                .addToBackStack(null)
+                //.addToBackStack(null) now clicking back won't remove it from view
                 .commit();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
@@ -189,6 +190,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 return MainFragment.newInstance();
             case Constants.TUTORIAL:
                 return TutorialsFragment.newInstance();
+            case Constants.MY_TUTORIALS :
+                return SavedTutorialFragment.newInstance();
             case Constants.RANDOM:
                 MainFragment fragment = TutorialViewerFragment.newInstance();
                 Bundle bundle = new Bundle();

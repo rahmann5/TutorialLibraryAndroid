@@ -19,34 +19,40 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="3dp">
+
+                    <ImageView
+                        android:id="@+id/fav_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:src="@drawable/ic_unfavorite"
+                        android:tag="@string/unfav_tut"/>
 
                     <TextView
                         android:id="@+id/tutorial_author"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.4"
                         android:text="By: test"
                         android:textSize="20sp"
-                        />
+                        android:gravity="center_vertical"/>
 
                     <TextView
                         android:id="@+id/tutorial_date"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="13th Feb 2018"
-                        android:textAlignment="textEnd"
-                        android:textSize="20sp"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.4"
+                        android:text="13 Feb 2018"
+                        android:textSize="20sp"
+                        android:gravity="center_vertical|right"/>
                 </LinearLayout>
-
-
 
                 <ImageView
                     android:id="@+id/tutorial_intro_img"
@@ -56,14 +62,12 @@
                     android:scaleType="center"
                     />
 
-                <TextView
+                <WebView
                     android:id="@+id/tutorial_intro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="A test intro"
                     android:textAlignment="center"
-                    android:padding="15dp"
-                    />
+                    android:padding="15dp"/>
 
             </LinearLayout>
 
