@@ -1,11 +1,15 @@
 package com.example.naziur.tutoriallibraryandroid.adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -25,10 +29,17 @@ public class TutorialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private Context mContext;
 
+    public interface ViewClickListener {
 
-    public TutorialAdapter(Context context) {
+        void onViewClick(boolean isTutorial, String id);
+    }
+
+    public static ViewClickListener listener;
+
+    public TutorialAdapter(Context context, ViewClickListener viewClickListener) {
         mContext = context;
         tutorialModels = new ArrayList<>();
+        listener = viewClickListener;
     }
 
     public void setTutorialModels(List<TutorialModel> tutorialModels) {
@@ -56,30 +67,70 @@ public class TutorialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public static class TutorialViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView titleTv, introTv, createdTv, tagOneTv, tagTwoTv;
+        public TextView titleTv, createdTv, tagOneTv, tagTwoTv;
+        public Button viewTutBtn;
+        public WebView introWv;
         public ImageView introIv;
+        public LinearLayout linearLayout;
 
         public TutorialViewHolder(View view) {
             super(view);
             titleTv = (TextView) view.findViewById(R.id.title_tv);
-            introTv = (TextView) view.findViewById(R.id.intro_tv);
+            introWv = (WebView) view.findViewById(R.id.intro_wv);
             createdTv = (TextView) view.findViewById(R.id.created_tv);
-            tagOneTv = (TextView) view.findViewById(R.id.tag_one_tv);
-            tagTwoTv = (TextView) view.findViewById(R.id.tag_two_tv);
+            //tagOneTv = (TextView) view.findViewById(R.id.tag_one_tv);
+            //tagTwoTv = (TextView) view.findViewById(R.id.tag_two_tv);
             introIv = (ImageView) view.findViewById(R.id.intro_image);
+            viewTutBtn = (Button) view.findViewById(R.id.view_tut_btn);
+            linearLayout = (LinearLayout) view.findViewById(R.id.tag_container);
         }
 
         private void bind(Context context, final TutorialModel tutorialModel) {
             titleTv.setText(tutorialModel.getTitle());
-            introTv.setText(tutorialModel.getIntro());
+            introWv.loadData(tutorialModel.getIntro(), "text/html; charset=utf-8", "UTF-8");
             createdTv.setText(tutorialModel.getCreatedAtDate());
             Glide.with(context).load(tutorialModel.getIntroImageUrl()).into(introIv);
-            tagOneTv.setText(tutorialModel.getTags()[0].getTagName());
+            /*tagOneTv.setText(tutorialModel.getTags()[0].getTagName());
             tagOneTv.setVisibility(View.VISIBLE);
             if(tutorialModel.getTags().length > 1){
                 tagTwoTv.setText(tutorialModel.getTags()[1].getTagName());
                 tagTwoTv.setVisibility(View.VISIBLE);
+
+                tagTwoTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onViewClick(false, tutorialModel.getTags()[1].getTagId());
+                    }
+                });
+            }*/
+            final TextView[] tv = new TextView[tutorialModel.getTags().length];
+            for(int i = 0; i < tutorialModel.getTags().length; i++){
+                tv[i] = new TextView(context);
+                LinearLayout.LayoutParams params=new LinearLayout.LayoutParams
+                        (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(0, 0, 10, 0);
+                tv[i].setLayoutParams(params);
+                tv[i].setText(tutorialModel.getTags()[i].getTagName());
+                tv[i].setTextColor(ContextCompat.getColor(context, R.color.tags_text_colour));
+                tv[i].setBackgroundColor(ContextCompat.getColor(context, R.color.tags_bg));
+                tv[i].setPadding(5, 5, 5, 5);
+                final int tag_id = i;
+                tv[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listener.onViewClick(false, ""+tutorialModel.getTags()[tag_id].getTagId());
+                    }
+                });
+
+                linearLayout.addView(tv[i]);
             }
+
+            viewTutBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onViewClick(true, tutorialModel.getTutorial_id());
+                }
+            });
         }
 
     }

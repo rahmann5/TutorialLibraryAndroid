@@ -9,8 +9,8 @@
     card_view:cardUseCompatPadding="true">
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -27,8 +27,8 @@
                 android:src="@drawable/default_img"
                 android:scaleType="centerCrop" />
 
-            <TextView
-                android:id="@+id/intro_tv"
+            <WebView
+                android:id="@+id/intro_wv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
@@ -38,7 +38,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:id="@+id/tag_container"
+                android:layout_marginTop="5dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -42,7 +42,13 @@ public class SearchFragment extends MainFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         RecyclerView mRecyclerView = view.findViewById(R.id.result_recycle_view);
-        mTutorialAdapter = new TutorialAdapter(getContext());
+        mTutorialAdapter = new TutorialAdapter(getContext(), new TutorialAdapter.ViewClickListener() {
+            @Override
+            public void onViewClick(boolean isTutorial, String id) {
+                // do what you want with view
+
+            }
+        });
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mTutorialAdapter);
