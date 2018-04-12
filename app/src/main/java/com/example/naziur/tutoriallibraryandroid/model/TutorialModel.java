@@ -11,7 +11,8 @@ public class TutorialModel {
     private SectionModel[] sections;
     private String[] references;
 
-    public TutorialModel(String title, String author, String intro, String introImageUrl, String createdAtDate, TagModel[] tags) {
+    public TutorialModel(String id, String title, String author, String intro, String introImageUrl, String createdAtDate, TagModel[] tags) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.intro = intro;
@@ -21,8 +22,7 @@ public class TutorialModel {
     }
 
     public TutorialModel (String id, String title, String author, String intro, String introImageUrl, String createdAtDate, TagModel[] tags, SectionModel[] sections, String[] references) {
-        this(title, author, intro, introImageUrl, createdAtDate, tags);
-        this.id = id;
+        this(id, title, author, intro, introImageUrl, createdAtDate, tags);
         this.sections = sections;
         this.references = references;
     }
