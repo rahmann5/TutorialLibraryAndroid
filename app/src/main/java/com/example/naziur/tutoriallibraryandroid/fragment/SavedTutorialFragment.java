@@ -1,6 +1,7 @@
 package com.example.naziur.tutoriallibraryandroid.fragment;
 
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,9 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.naziur.tutoriallibraryandroid.MainActivity;
 import com.example.naziur.tutoriallibraryandroid.R;
 import com.example.naziur.tutoriallibraryandroid.adapters.SavedTutorialAdapter;
-import com.example.naziur.tutoriallibraryandroid.adapters.SectionAdapter;
 import com.example.naziur.tutoriallibraryandroid.database.TutorialDBHelper;
 
 /**
@@ -38,9 +39,10 @@ public class SavedTutorialFragment extends MainFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_saved_tutorial, container, false);
+        View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.title_saved_tut));
         tutorialDb = new TutorialDBHelper(getContext());
-        savedTutorialRecyclerView = (RecyclerView) view.findViewById(R.id.saved_tutorial_list);
+        savedTutorialRecyclerView = (RecyclerView) view.findViewById(R.id.all_recycle_view);
         setUpRecycler ();
         return view;
     }
@@ -60,8 +62,10 @@ public class SavedTutorialFragment extends MainFragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                String tid = (String) viewHolder.itemView.findViewById(R.id.tutorial_name).getTag();
+                int position = viewHolder.getAdapterPosition();
+                String tid = savedTutorialAdapter.savedTuts.get(position).getId();
                 tutorialDb.removeFavTutorial(tid);
+                savedTutorialAdapter.updateState(position);
             }
         };
 

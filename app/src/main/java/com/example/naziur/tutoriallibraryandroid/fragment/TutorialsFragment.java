@@ -52,7 +52,7 @@ public class TutorialsFragment extends MainFragment implements ServerRequestMana
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_tutorials, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         tutorialAdapter = new TutorialAdapter(getContext(), new TutorialAdapter.ViewClickListener() {
             @Override
             public void onViewClick(boolean isTutorial, String id) {
@@ -75,7 +75,7 @@ public class TutorialsFragment extends MainFragment implements ServerRequestMana
                 }
             }
         });
-        RecyclerView mRecyclerView = rootView.findViewById(R.id.tutorials_recycle_view);
+        RecyclerView mRecyclerView = rootView.findViewById(R.id.all_recycle_view);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

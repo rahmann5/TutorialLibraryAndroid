@@ -20,6 +20,9 @@
     <!-- Remove glide dependency from setTag of ImageView -->
     <item name="glide_tag" type="id" />
 
+    <!-- App Titles -->
+    <string name="title_saved_tut">My Tutorials</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

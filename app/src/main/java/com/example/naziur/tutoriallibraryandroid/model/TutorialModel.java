@@ -27,6 +27,12 @@ public class TutorialModel {
         this.references = references;
     }
 
+    public TutorialModel (String id, String title, String author) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+    }
+
     public String getTitle() {
         return title;
     }

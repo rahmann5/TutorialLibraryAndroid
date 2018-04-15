@@ -35,7 +35,6 @@ public class CategoryFragment extends MainFragment implements ServerRequestManag
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private CategoryAdapter categoryAdapter;
-    private TextView emptyActivity;
     public CategoryFragment() {
         // Required empty public constructor
     }
@@ -49,11 +48,10 @@ public class CategoryFragment extends MainFragment implements ServerRequestManag
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_category, container, false);
+        View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         ServerRequestManager.setOnRequestCompleteListener(this);
         ServerRequestManager.getAllTags(getActivity());
-        emptyActivity = (TextView) view.findViewById(R.id.empty_category);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_category_viewer);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.all_recycle_view);
         setUpRecyclerView();
         return view;
     }
@@ -64,16 +62,9 @@ public class CategoryFragment extends MainFragment implements ServerRequestManag
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(categoryAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-        toggleEmptyActivityIcon();
     }
 
-    private void toggleEmptyActivityIcon(){
-        if(categoryAdapter.getItemCount() > 0) {
-            emptyActivity.setVisibility(View.GONE);
-        } else {
-            emptyActivity.setVisibility(View.VISIBLE);
-        }
-    }
+
 
     private ArrayList<CategoryModel> loadCategoriesData (String... s) {
         ArrayList<CategoryModel> categoryModels = new ArrayList<>();
@@ -112,7 +103,6 @@ public class CategoryFragment extends MainFragment implements ServerRequestManag
         switch (command) {
             case ServerRequestManager.COMMAND_All_TAGS :
                 categoryAdapter.setCategoryData(loadCategoriesData(s));
-                toggleEmptyActivityIcon();
                 break;
 
         }
