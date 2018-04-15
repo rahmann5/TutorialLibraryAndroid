@@ -1,9 +1,16 @@
 package com.example.naziur.tutoriallibraryandroid.fragment;
 
 
+import android.app.LoaderManager;
 import android.app.SearchManager;
+import android.content.Context;
+import android.content.Loader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -18,14 +25,28 @@ import android.widget.Spinner;
 
 import com.example.naziur.tutoriallibraryandroid.R;
 import com.example.naziur.tutoriallibraryandroid.adapters.TutorialAdapter;
+import com.example.naziur.tutoriallibraryandroid.model.TutorialModel;
+import com.example.naziur.tutoriallibraryandroid.utility.ServerRequestManager;
+import com.example.naziur.tutoriallibraryandroid.utility.TutorialLoader;
+
+import java.util.List;
+
+import static com.example.naziur.tutoriallibraryandroid.utility.Constants.FRAGMENT_KEY_TUT_ID;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFragment extends MainFragment {
+public class SearchFragment extends MainFragment implements ServerRequestManager.OnRequestCompleteListener, LoaderManager.LoaderCallbacks<List<TutorialModel>>{
 
     private TutorialAdapter mTutorialAdapter;
     private LinearLayoutManager mLayoutManager;
+    private String json;
+    private String tagId;
+    /**
+     * Constant value for the earthquake loader ID. We can choose any integer.
+     * This really only comes into play if you're using multiple loaders.
+     */
+    private static final int SEARCH_TUTORIAL_LOADER_ID = 1;
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -45,7 +66,21 @@ public class SearchFragment extends MainFragment {
         mTutorialAdapter = new TutorialAdapter(getContext(), new TutorialAdapter.ViewClickListener() {
             @Override
             public void onViewClick(boolean isTutorial, String id) {
-                // do what you want with view
+                if(isTutorial) {
+                    Bundle args = new Bundle();
+                    args.putString(FRAGMENT_KEY_TUT_ID, id);
+                    Fragment fragment = new TutorialViewerFragment();
+                    switchFragment(fragment, args);
+                } else {
+                    tagId = id;
+                    Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.content_frame);
+                    if (currentFragment instanceof SearchFragment) {
+                        FragmentTransaction fragTransaction =   (getActivity()).getSupportFragmentManager().beginTransaction();
+                        fragTransaction.detach(currentFragment);
+                        fragTransaction.attach(currentFragment);
+                        fragTransaction.commit();
+                    }
+                }
 
             }
         });
@@ -53,7 +88,18 @@ public class SearchFragment extends MainFragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mTutorialAdapter);
         setHasOptionsMenu(true);
+        ServerRequestManager.setOnRequestCompleteListener(this);
         return view;
+    }
+
+    private void switchFragment(Fragment fragment, Bundle args){
+        if(args != null)
+            fragment.setArguments(args);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content_frame, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -79,7 +125,7 @@ public class SearchFragment extends MainFragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 performSearch(query, spinner.getSelectedItem().toString());
-                return false;
+                return true;
             }
 
             @Override
@@ -91,7 +137,62 @@ public class SearchFragment extends MainFragment {
     }
 
     private void performSearch(String query, String spinnerData){
+        ServerRequestManager.getTutorialSearchResult(getContext(), query, spinnerData);
+    }
+
+    @Override
+    public void onSuccessfulRequestListener(String command, String... s) {
+        switch (command){
+            case ServerRequestManager.COMMAND_SEARCH_FOR_TUTORIAL:
+                json = s[0];
+                System.out.println(json);
+                // Get a reference to the ConnectivityManager to check state of network connectivity
+                ConnectivityManager connMgr = (ConnectivityManager)
+                        getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                // Get details on the currently active default data network
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+                // If there is a network connection, fetch data
+                if (networkInfo != null && networkInfo.isConnected()) {
+                    // Get a reference to the LoaderManager, in order to interact with loaders.
+                    LoaderManager loaderManager = getActivity().getLoaderManager();
+
+                    // Initialize the loader. Pass in the int ID constant defined above and pass in null for
+                    // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
+                    // because this activity implements the LoaderCallbacks interface).
+                    loaderManager.restartLoader(SEARCH_TUTORIAL_LOADER_ID, null, this);
+                } else {
+                    // Otherwise, display error
+                    // First, hide loading indicator so error message will be visible
+                    //View loadingIndicator = findViewById(R.id.loading_indicator);
+                    //loadingIndicator.setVisibility(View.GONE);
+
+                    // Update empty state with no connection error message
+                    //mEmptyStateTextView.setText(R.string.no_internet_connection);
+                }
+        }
+    }
+
+    @Override
+    public void onFailedRequestListener(String command, String... s) {
 
     }
 
+    @Override
+    public Loader<List<TutorialModel>> onCreateLoader(int i, Bundle bundle) {
+        return new TutorialLoader(getContext(), json);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<TutorialModel>> loader, List<TutorialModel> tutorialModels) {
+        mTutorialAdapter.setTutorialModels(tutorialModels);
+        mTutorialAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<TutorialModel>> loader) {
+        // Loader reset, so we can clear out our existing data.
+        mTutorialAdapter.clear();
+    }
 }

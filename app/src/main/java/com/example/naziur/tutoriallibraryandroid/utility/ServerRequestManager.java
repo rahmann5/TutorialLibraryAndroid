@@ -30,6 +30,7 @@ public class ServerRequestManager {
     public static final String COMMAND_GET_ALL_TUTORIALS = "get_all_tutorials";
     public static final String COMMAND_SINGLE_TUTORIAL = "get_a_tutorial";
     public static final String COMMAND_TUTORIALS_FOR_TAG = "get_tutorials_for_tag";
+    public static final String COMMAND_SEARCH_FOR_TUTORIAL = "search_for_tutorial";
 
     private static OnRequestCompleteListener onRequestCompleteListener;
 
@@ -138,6 +139,32 @@ public class ServerRequestManager {
                 Map<String, String> params = new Hashtable<String, String>();
                 params.put(APP_VALUE, APP_KEY);
                 params.put("tag_id", tagId);
+                return params;
+            }
+        };
+
+        createRequest(stringRequest, context);
+    }
+
+    public static void getTutorialSearchResult(Context context, final String searchString, final String searchType){
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, END_POINT + COMMAND_SEARCH_FOR_TUTORIAL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                onRequestCompleteListener.onSuccessfulRequestListener(COMMAND_SEARCH_FOR_TUTORIAL, response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                onRequestCompleteListener.onFailedRequestListener(COMMAND_SEARCH_FOR_TUTORIAL, error.toString());
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new Hashtable<String, String>();
+                params.put(APP_VALUE, APP_KEY);
+                params.put("search", searchString);
+                params.put("filter", searchType);
                 return params;
             }
         };

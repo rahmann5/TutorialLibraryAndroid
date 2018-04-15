@@ -65,6 +65,12 @@ public class TutorialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return tutorialModels.size();
     }
 
+    public void clear() {
+        final int size = tutorialModels.size();
+        tutorialModels.clear();
+        notifyItemRangeRemoved(0, size);
+    }
+
     public static class TutorialViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView titleTv, createdTv, tagOneTv, tagTwoTv;
