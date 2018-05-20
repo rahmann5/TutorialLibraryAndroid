@@ -1,5 +1,7 @@
 package com.example.naziur.tutoriallibraryandroid;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,12 +17,14 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
 
 import com.example.naziur.tutoriallibraryandroid.fragment.CategoryFragment;
+import com.example.naziur.tutoriallibraryandroid.fragment.FeedbackFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.HomeFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.MainFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.SavedTutorialFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.TutorialViewerFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.SearchFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.TutorialsFragment;
+import com.example.naziur.tutoriallibraryandroid.utility.AppRater;
 import com.example.naziur.tutoriallibraryandroid.utility.Constants;
 
 import java.util.ArrayList;
@@ -34,7 +38,7 @@ import yalantis.com.sidemenu.model.SlideMenuItem;
 import yalantis.com.sidemenu.util.ViewAnimator;
 
 
-public class MainActivity extends AppCompatActivity implements ViewAnimator.ViewAnimatorListener {
+public class MainActivity extends AppCompatActivity implements ViewAnimator.ViewAnimatorListener{
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private List<SlideMenuItem> list = new ArrayList<>();
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainFragment = HomeFragment.newInstance();
@@ -52,6 +57,12 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 .replace(R.id.content_frame, mainFragment)
                 //.addToBackStack(null) now clicking back won't remove it from view
                 .commit();
+        if (AppRater.app_launched(this)) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, FeedbackFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit();
+        }
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
         linearLayout = (LinearLayout) findViewById(R.id.left_drawer);
@@ -71,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(Constants.CLOSE, R.drawable.icn_close);
         list.add(menuItem0);
+        Fragment frag = getSupportFragmentManager().findFragmentById(R.id.content_frame);
         SlideMenuItem menuItem = new SlideMenuItem(Constants.HOME, R.drawable.ic_home);
         list.add(menuItem);
         SlideMenuItem menuItem1 = new SlideMenuItem(Constants.TUTORIAL, R.drawable.ic_tutorial);
@@ -149,9 +161,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         //findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
         findViewById(R.id.content_overlay).setBackground(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
         animator.start();
-        MainFragment mainFragment = getSelectedFragment(selected);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, mainFragment).addToBackStack(null).commit();
-        return mainFragment;
+        return preventSameFragmentStacking(getSelectedFragment(selected));
     }
 
     @Override
@@ -187,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             case Constants.CATEGORY :
                 return CategoryFragment.newInstance();
             case Constants.HOME:
-                return MainFragment.newInstance();
+                return HomeFragment.newInstance();
             case Constants.TUTORIAL:
                 return TutorialsFragment.newInstance();
             case Constants.MY_TUTORIALS :
@@ -200,9 +210,26 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 return fragment;
             case Constants.SEARCH:
                 return SearchFragment.newInstance();
+            case Constants.FEEDBACK:
+                return FeedbackFragment.newInstance();
             default:
                 return HomeFragment.newInstance();
         }
     }
+
+    private MainFragment preventSameFragmentStacking (MainFragment fragment) {
+        Fragment current = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+        if (!current.getClass().equals(fragment.getClass())) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            final String tag = fragment.getClass().getSimpleName();
+            transaction.addToBackStack(tag);
+            transaction.replace(R.id.content_frame, fragment, tag);
+            transaction.commit();
+        }
+
+        return fragment;
+    }
+
+
 }
 

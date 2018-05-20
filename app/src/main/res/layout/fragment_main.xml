@@ -22,13 +22,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/tutorial"
                     android:layout_width="128dp"
                     android:layout_height="128dp"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:clickable="true">
 
                     <ImageView
-                        android:id="@+id/tutorialModel"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
@@ -45,13 +46,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/category"
                     android:layout_width="128dp"
                     android:layout_height="128dp"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:clickable="true">
 
                     <ImageView
-                        android:id="@+id/category"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
@@ -76,13 +78,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/my_tutorials"
                     android:layout_width="128dp"
                     android:layout_height="128dp"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:clickable="true">
 
                     <ImageView
-                        android:id="@+id/my_tutorials"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
@@ -99,13 +102,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/random"
                     android:layout_width="128dp"
                     android:layout_height="128dp"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:clickable="true">
 
                     <ImageView
-                        android:id="@+id/random"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
@@ -130,13 +134,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/about"
                     android:layout_width="128dp"
                     android:layout_height="128dp"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:clickable="true">
 
                     <ImageView
-                        android:id="@+id/my_about"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
@@ -153,13 +158,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/search"
                     android:layout_width="128dp"
                     android:layout_height="128dp"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:clickable="true">
 
                     <ImageView
-                        android:id="@+id/search"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
@@ -184,13 +190,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/settings"
                     android:layout_width="128dp"
                     android:layout_height="128dp"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:clickable="true">
 
                     <ImageView
-                        android:id="@+id/settings"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
@@ -207,13 +214,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/feedack"
                     android:layout_width="128dp"
                     android:layout_height="128dp"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:clickable="true">
 
                     <ImageView
-                        android:id="@+id/feedack"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
