@@ -26,11 +26,13 @@ import android.widget.Spinner;
 import com.example.naziur.tutoriallibraryandroid.R;
 import com.example.naziur.tutoriallibraryandroid.adapters.TutorialAdapter;
 import com.example.naziur.tutoriallibraryandroid.model.TutorialModel;
+import com.example.naziur.tutoriallibraryandroid.utility.ProgressDialog;
 import com.example.naziur.tutoriallibraryandroid.utility.ServerRequestManager;
 import com.example.naziur.tutoriallibraryandroid.utility.TutorialLoader;
 
 import java.util.List;
 
+import static com.example.naziur.tutoriallibraryandroid.utility.Constants.FRAGMENT_KEY_TAG_ID;
 import static com.example.naziur.tutoriallibraryandroid.utility.Constants.FRAGMENT_KEY_TUT_ID;
 
 /**
@@ -41,7 +43,6 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
     private TutorialAdapter mTutorialAdapter;
     private LinearLayoutManager mLayoutManager;
     private String json;
-    private String tagId;
     /**
      * Constant value for the earthquake loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
@@ -62,6 +63,7 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
                                Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+        progressDialog = new ProgressDialog(getActivity(), R.layout.progress_dialog, true);
         RecyclerView mRecyclerView = view.findViewById(R.id.result_recycle_view);
         mTutorialAdapter = new TutorialAdapter(getContext(), new TutorialAdapter.ViewClickListener() {
             @Override
@@ -72,14 +74,10 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
                     Fragment fragment = new TutorialViewerFragment();
                     switchFragment(fragment, args);
                 } else {
-                    tagId = id;
-                    Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.content_frame);
-                    if (currentFragment instanceof SearchFragment) {
-                        FragmentTransaction fragTransaction =   (getActivity()).getSupportFragmentManager().beginTransaction();
-                        fragTransaction.detach(currentFragment);
-                        fragTransaction.attach(currentFragment);
-                        fragTransaction.commit();
-                    }
+                    Bundle args = new Bundle();
+                    args.putString(FRAGMENT_KEY_TAG_ID, id);
+                    Fragment fragment = new TutorialsFragment();
+                    switchFragment(fragment, args);
                 }
 
             }
@@ -138,6 +136,7 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
 
     private void performSearch(String query, String spinnerData){
         ServerRequestManager.getTutorialSearchResult(getContext(), query, spinnerData);
+        progressDialog.toggleDialog(true);
     }
 
     @Override
@@ -145,7 +144,7 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
         switch (command){
             case ServerRequestManager.COMMAND_SEARCH_FOR_TUTORIAL:
                 json = s[0];
-                System.out.println(json);
+                //System.out.println(json);
                 // Get a reference to the ConnectivityManager to check state of network connectivity
                 ConnectivityManager connMgr = (ConnectivityManager)
                         getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -176,7 +175,7 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
 
     @Override
     public void onFailedRequestListener(String command, String... s) {
-
+        progressDialog.toggleDialog(false);
     }
 
     @Override
@@ -188,11 +187,13 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
     public void onLoadFinished(Loader<List<TutorialModel>> loader, List<TutorialModel> tutorialModels) {
         mTutorialAdapter.setTutorialModels(tutorialModels);
         mTutorialAdapter.notifyDataSetChanged();
+        progressDialog.toggleDialog(false);
     }
 
     @Override
     public void onLoaderReset(Loader<List<TutorialModel>> loader) {
         // Loader reset, so we can clear out our existing data.
         mTutorialAdapter.clear();
+        progressDialog.toggleDialog(false);
     }
 }

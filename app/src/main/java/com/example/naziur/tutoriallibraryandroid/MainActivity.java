@@ -22,6 +22,7 @@ import com.example.naziur.tutoriallibraryandroid.fragment.TutorialViewerFragment
 import com.example.naziur.tutoriallibraryandroid.fragment.SearchFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.TutorialsFragment;
 import com.example.naziur.tutoriallibraryandroid.utility.Constants;
+import com.example.naziur.tutoriallibraryandroid.utility.ProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;

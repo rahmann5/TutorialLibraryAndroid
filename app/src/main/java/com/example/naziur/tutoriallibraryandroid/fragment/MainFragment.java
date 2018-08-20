@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.naziur.tutoriallibraryandroid.MainActivity;
 import com.example.naziur.tutoriallibraryandroid.R;
+import com.example.naziur.tutoriallibraryandroid.utility.ProgressDialog;
 
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
@@ -17,12 +19,16 @@ import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 public class MainFragment extends Fragment implements ScreenShotable {
 
+    protected ProgressDialog progressDialog;
+
     public MainFragment() {
         // Required empty public constructor
+
     }
 
     public static MainFragment newInstance(){
         MainFragment mainFragment = new MainFragment();
+
         return mainFragment;
     }
 
@@ -30,7 +36,6 @@ public class MainFragment extends Fragment implements ScreenShotable {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
-
         return v;
     }
 

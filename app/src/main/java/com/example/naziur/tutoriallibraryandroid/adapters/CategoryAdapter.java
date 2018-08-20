@@ -20,10 +20,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private ArrayList<CategoryModel> categoryData;
     private Context context;
+    public static TutorialAdapter.ViewClickListener listener;
 
-    public CategoryAdapter (Context context) {
+    public CategoryAdapter (Context context, TutorialAdapter.ViewClickListener listener) {
         categoryData = new ArrayList<>();
         this.context = context;
+        this.listener = listener;
     }
 
     public void setCategoryData(ArrayList<CategoryModel> tagData) {
@@ -95,8 +97,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             categoryName = (TextView) itemView.findViewById(R.id.categoryName);
         }
 
-        void bind (Context context, CategoryModel categoryModel) {
+        void bind (Context context, final CategoryModel categoryModel) {
             categoryName.setText(categoryModel.getText());
+            categoryName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onViewClick(false, categoryModel.getId());
+                }
+            });
         }
     }
 }

@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import com.example.naziur.tutoriallibraryandroid.R;
 import com.example.naziur.tutoriallibraryandroid.adapters.TutorialAdapter;
 import com.example.naziur.tutoriallibraryandroid.model.TutorialModel;
+import com.example.naziur.tutoriallibraryandroid.utility.Constants;
+import com.example.naziur.tutoriallibraryandroid.utility.ProgressDialog;
 import com.example.naziur.tutoriallibraryandroid.utility.ServerRequestManager;
 import com.example.naziur.tutoriallibraryandroid.utility.TutorialLoader;
 
@@ -53,8 +55,15 @@ public class TutorialsFragment extends MainFragment implements LoaderManager.Loa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tutorials, container, false);
         ServerRequestManager.setOnRequestCompleteListener(this);
+        progressDialog = new ProgressDialog(getActivity(), R.layout.progress_dialog, true);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            tagId = bundle.getString(Constants.FRAGMENT_KEY_TAG_ID);
+            this.getArguments().clear();
+        }
+
         tutorialAdapter = new TutorialAdapter(getContext(), new TutorialAdapter.ViewClickListener() {
             @Override
             public void onViewClick(boolean isTutorial, String id) {
@@ -81,7 +90,7 @@ public class TutorialsFragment extends MainFragment implements LoaderManager.Loa
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(tutorialAdapter);
-
+        progressDialog.toggleDialog(true);
         if(tagId == null)
             ServerRequestManager.getTutorials(getContext());
         else
@@ -121,6 +130,7 @@ public class TutorialsFragment extends MainFragment implements LoaderManager.Loa
         switch(command){
             case ServerRequestManager.COMMAND_GET_ALL_TUTORIALS:
             case ServerRequestManager.COMMAND_TUTORIALS_FOR_TAG:
+                progressDialog.toggleDialog(false);
                 json = s[0];
                 // Get a reference to the ConnectivityManager to check state of network connectivity
                 ConnectivityManager connMgr = (ConnectivityManager)
@@ -152,6 +162,6 @@ public class TutorialsFragment extends MainFragment implements LoaderManager.Loa
 
     @Override
     public void onFailedRequestListener(String command, String... s) {
-
+        progressDialog.toggleDialog(true);
     }
 }

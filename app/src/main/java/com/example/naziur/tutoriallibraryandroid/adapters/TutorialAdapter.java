@@ -95,6 +95,7 @@ public class TutorialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             createdTv.setText(tutorialModel.getCreatedAtDate());
             Glide.with(context).load(tutorialModel.getIntroImageUrl()).into(introIv);
             final TextView[] tv = new TextView[tutorialModel.getTags().length];
+            linearLayout.removeAllViewsInLayout();
             for(int i = 0; i < tutorialModel.getTags().length; i++){
                 tv[i] = new TextView(context);
                 LinearLayout.LayoutParams params=new LinearLayout.LayoutParams

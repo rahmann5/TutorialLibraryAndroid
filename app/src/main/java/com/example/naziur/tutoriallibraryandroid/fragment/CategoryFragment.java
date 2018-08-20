@@ -1,32 +1,32 @@
 package com.example.naziur.tutoriallibraryandroid.fragment;
 
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.naziur.tutoriallibraryandroid.R;
 import com.example.naziur.tutoriallibraryandroid.adapters.CategoryAdapter;
+import com.example.naziur.tutoriallibraryandroid.adapters.TutorialAdapter;
 import com.example.naziur.tutoriallibraryandroid.model.CategoryModel;
+import com.example.naziur.tutoriallibraryandroid.utility.ProgressDialog;
 import com.example.naziur.tutoriallibraryandroid.utility.ServerRequestManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import yalantis.com.sidemenu.interfaces.ScreenShotable;
+import static com.example.naziur.tutoriallibraryandroid.utility.Constants.FRAGMENT_KEY_TAG_ID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,7 +48,9 @@ public class CategoryFragment extends MainFragment implements ServerRequestManag
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        View view = inflater.inflate(R.layout.fragment_tutorials, container, false);
+        progressDialog = new ProgressDialog(getActivity(), R.layout.progress_dialog, true);
+        progressDialog.toggleDialog(true);
         ServerRequestManager.setOnRequestCompleteListener(this);
         ServerRequestManager.getAllTags(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.all_recycle_view);
@@ -57,14 +59,30 @@ public class CategoryFragment extends MainFragment implements ServerRequestManag
     }
 
     private void setUpRecyclerView () {
-        categoryAdapter = new CategoryAdapter(getActivity());
+        categoryAdapter = new CategoryAdapter(getActivity(), new TutorialAdapter.ViewClickListener() {
+            @Override
+            public void onViewClick(boolean isTutorial, String id) {
+                Bundle args = new Bundle();
+                args.putString(FRAGMENT_KEY_TAG_ID, id);
+                Fragment fragment = new TutorialsFragment();
+                switchFragment(fragment, args);
+            }
+        });
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(categoryAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
     }
 
-
+    private void switchFragment(Fragment fragment, Bundle args){
+        if(args != null)
+            fragment.setArguments(args);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content_frame, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 
     private ArrayList<CategoryModel> loadCategoriesData (String... s) {
         ArrayList<CategoryModel> categoryModels = new ArrayList<>();
@@ -100,6 +118,7 @@ public class CategoryFragment extends MainFragment implements ServerRequestManag
 
     @Override
     public void onSuccessfulRequestListener(String command, String... s) {
+        progressDialog.toggleDialog(false);
         switch (command) {
             case ServerRequestManager.COMMAND_All_TAGS :
                 categoryAdapter.setCategoryData(loadCategoriesData(s));
@@ -110,6 +129,7 @@ public class CategoryFragment extends MainFragment implements ServerRequestManag
 
     @Override
     public void onFailedRequestListener(String command, String... s) {
+        progressDialog.toggleDialog(false);
         switch (command) {
             case ServerRequestManager.COMMAND_All_TAGS :
                 Toast.makeText(getActivity(), "ERROR " + s[0], Toast.LENGTH_LONG).show();
