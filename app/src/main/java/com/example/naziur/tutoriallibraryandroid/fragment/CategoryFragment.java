@@ -11,9 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 
+import com.example.naziur.tutoriallibraryandroid.MainActivity;
 import com.example.naziur.tutoriallibraryandroid.R;
 import com.example.naziur.tutoriallibraryandroid.adapters.CategoryAdapter;
 import com.example.naziur.tutoriallibraryandroid.adapters.TutorialAdapter;
@@ -48,7 +48,10 @@ public class CategoryFragment extends MainFragment implements ServerRequestManag
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setComponentVisibleListener();
+        componentVisibleListener.resetLayout();
         View view = inflater.inflate(R.layout.fragment_tutorials, container, false);
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.title_categories));
         progressDialog = new ProgressDialog(getActivity(), R.layout.progress_dialog, true);
         progressDialog.toggleDialog(true);
         ServerRequestManager.setOnRequestCompleteListener(this);
@@ -118,23 +121,25 @@ public class CategoryFragment extends MainFragment implements ServerRequestManag
 
     @Override
     public void onSuccessfulRequestListener(String command, String... s) {
-        progressDialog.toggleDialog(false);
         switch (command) {
             case ServerRequestManager.COMMAND_All_TAGS :
                 categoryAdapter.setCategoryData(loadCategoriesData(s));
+                componentVisibleListener.onErrorFound(false, "");
                 break;
 
         }
+        progressDialog.toggleDialog(false);
     }
 
     @Override
     public void onFailedRequestListener(String command, String... s) {
-        progressDialog.toggleDialog(false);
         switch (command) {
             case ServerRequestManager.COMMAND_All_TAGS :
-                Toast.makeText(getActivity(), "ERROR " + s[0], Toast.LENGTH_LONG).show();
+                setActionBarTitle(getResources().getString(R.string.server_error));
+                componentVisibleListener.onErrorFound(true, s[0]);
                 break;
 
         }
+        progressDialog.toggleDialog(false);
     }
 }

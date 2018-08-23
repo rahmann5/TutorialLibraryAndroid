@@ -1,7 +1,6 @@
 package com.example.naziur.tutoriallibraryandroid.fragment;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -12,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.naziur.tutoriallibraryandroid.MainActivity;
 import com.example.naziur.tutoriallibraryandroid.R;
 
 /**
@@ -29,8 +29,9 @@ public class FeedbackFragment extends MainFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setComponentVisibleListener();
         View v = inflater.inflate(R.layout.fragment_feedback, container, false);
-
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.title_feedback));
         Button rateNow = (Button) v.findViewById(R.id.rate_now);
         rateNow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,8 @@ public class FeedbackFragment extends MainFragment {
                 getFragmentManager().popBackStack();
             }
         });
+
+        componentVisibleListener.onErrorFound(false, "");
 
         return v;
     }

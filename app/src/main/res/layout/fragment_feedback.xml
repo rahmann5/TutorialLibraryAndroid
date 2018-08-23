@@ -3,43 +3,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.naziur.tutoriallibraryandroid.fragment.FeedbackFragment"
-    android:padding="5dp">
+    android:background="#1193df">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo"
+        android:padding="20dp"
+        android:background="@drawable/circle_fill_shape"
+        android:backgroundTint="#dafcfc"
+        android:layout_above="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="If your enjoying Tutorial Library, please take a momment to rate it."
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:layout_alignParentTop="true" />
-
-    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:text="@string/feedback_msg"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:gravity="center">
+        android:id="@+id/textView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
 
         <Button
             android:id="@+id/rate_now"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:drawableBottom="@drawable/ic_rate"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:background="#77b3d6"
+            android:padding="15dp"
             android:text="Rate"
             />
 
         <Button
             android:id="@+id/rate_later"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Remind me later"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:drawableBottom="@drawable/ic_later"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:background="#77b3d6"
+            android:padding="15dp"
+            android:text="Later"
             />
 
         <Button
             android:id="@+id/rate_never"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No, Thanks"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:drawableBottom="@drawable/ic_no_rate"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:background="#77b3d6"
+            android:padding="15dp"
+            android:text="No"
             />
 
     </LinearLayout>
