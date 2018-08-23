@@ -15,10 +15,8 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.naziur.tutoriallibraryandroid.MainActivity;
 import com.example.naziur.tutoriallibraryandroid.R;
 import com.example.naziur.tutoriallibraryandroid.adapters.ReferenceAdapter;
 import com.example.naziur.tutoriallibraryandroid.adapters.TagsAdapter;
@@ -27,6 +25,7 @@ import com.example.naziur.tutoriallibraryandroid.model.SectionModel;
 import com.example.naziur.tutoriallibraryandroid.model.TagModel;
 import com.example.naziur.tutoriallibraryandroid.model.TutorialModel;
 import com.example.naziur.tutoriallibraryandroid.adapters.SectionAdapter;
+import com.example.naziur.tutoriallibraryandroid.utility.ProgressDialog;
 import com.example.naziur.tutoriallibraryandroid.utility.ServerRequestManager;
 
 import org.json.JSONArray;
@@ -67,7 +66,8 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        setComponentVisibleListener();
+        componentVisibleListener.resetLayout();
         view = inflater.inflate(R.layout.fragment_tutorial_viewer, container, false);
         ServerRequestManager.setOnRequestCompleteListener(this);
         tutorialDb = new TutorialDBHelper(getContext());
@@ -76,7 +76,8 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
         if (bundle != null) {
             ServerRequestManager.getTutorial(getActivity(), bundle.getString(FRAGMENT_KEY_TUT_ID));
         }
-
+        progressDialog = new ProgressDialog(getActivity(), R.layout.progress_dialog, true);
+        progressDialog.toggleDialog(true);
         sectionRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tutorial_section_viewer);
         tagsRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tutorial_tags);
         referenceRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_tutorial_refs);
@@ -189,7 +190,7 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
 
     private void displayTutorial () {
         updateFavIcon(tutorialDb.isFavorite(tutorialModel.getId()));
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(tutorialModel.getTitle());
+        setActionBarTitle(tutorialModel.getTitle());
         ((TextView) view.findViewById(R.id.tutorial_author)).setText("By: " + tutorialModel.getAuthor());
         ((TextView) view.findViewById(R.id.tutorial_date)).setText(tutorialModel.getCreatedAtDate());
         ((WebView) view.findViewById(R.id.tutorial_intro)).loadDataWithBaseURL(null, tutorialModel.getIntro(), "text/html", "utf-8", null);
@@ -205,18 +206,22 @@ public class TutorialViewerFragment extends MainFragment implements ServerReques
                     loadData(s[0]);
                     onlineButton.setVisibility(View.VISIBLE);
                     favButton.setEnabled(true);
+                    componentVisibleListener.onErrorFound(false, "");
                 }
                 break;
         }
+        progressDialog.toggleDialog(false);
     }
 
     @Override
     public void onFailedRequestListener(String command, String... s) {
         switch (command) {
             case ServerRequestManager.COMMAND_SINGLE_TUTORIAL :
-                Toast.makeText(getActivity(), "ERROR " + s[0], Toast.LENGTH_LONG).show();
+                setActionBarTitle(getResources().getString(R.string.server_error));
+                componentVisibleListener.onErrorFound(true, s[0]);
                 break;
         }
+        progressDialog.toggleDialog(false);
     }
 
     private void updateFavIcon (boolean fav) {

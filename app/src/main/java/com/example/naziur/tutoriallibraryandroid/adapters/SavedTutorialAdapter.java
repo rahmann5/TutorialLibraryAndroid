@@ -94,7 +94,7 @@ public class SavedTutorialAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private static class SavedTutorialViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
-        public TextView title, author;
+        public TextView title, author, icon;
         private SavedTutorialAdapter.OnClickListener onClickListener;
 
         public SavedTutorialViewHolder  (View itemView)
@@ -102,6 +102,7 @@ public class SavedTutorialAdapter extends RecyclerView.Adapter<RecyclerView.View
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.tutorial_name);
             author = (TextView) itemView.findViewById(R.id.tutorial_author);
+            icon = (TextView) itemView.findViewById(R.id.saved_icon);
             itemView.setOnClickListener(this);
         }
 
@@ -116,7 +117,8 @@ public class SavedTutorialAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         void bind (String tTile, String tAuthor) {
             title.setText(tTile);
-            author.setText(tAuthor);
+            author.setText(tAuthor.substring(0,1).toUpperCase() + tAuthor.substring(1));
+            icon.setText(tAuthor.substring(0,1).toUpperCase());
         }
 
     }

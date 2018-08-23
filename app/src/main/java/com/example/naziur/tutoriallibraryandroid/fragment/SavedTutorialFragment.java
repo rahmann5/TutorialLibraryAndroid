@@ -1,7 +1,9 @@
 package com.example.naziur.tutoriallibraryandroid.fragment;
 
 
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +40,8 @@ public class SavedTutorialFragment extends MainFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setComponentVisibleListener();
+        componentVisibleListener.resetLayout();
         View view = inflater.inflate(R.layout.fragment_tutorials, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.title_saved_tut));
         tutorialDb = new TutorialDBHelper(getContext());
@@ -47,29 +51,60 @@ public class SavedTutorialFragment extends MainFragment {
     }
 
     private void setUpRecycler () {
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        savedTutorialAdapter = new SavedTutorialAdapter(getActivity(),tutorialDb.getAllMyTutorial());
-        savedTutorialRecyclerView.setLayoutManager(mLayoutManager);
-        savedTutorialRecyclerView.setAdapter(savedTutorialAdapter);
 
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        Cursor c = tutorialDb.getAllMyTutorial();
+        if ((c != null) && (c.getCount() > 0)) {
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            savedTutorialAdapter = new SavedTutorialAdapter(getActivity(),c);
+            savedTutorialRecyclerView.setLayoutManager(mLayoutManager);
+            savedTutorialRecyclerView.setAdapter(savedTutorialAdapter);
 
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
+            final Snackbar snack = Snackbar.make(getView(), "UNDO", Snackbar.LENGTH_LONG);
 
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                int position = viewHolder.getAdapterPosition();
-                String tid = savedTutorialAdapter.savedTuts.get(position).getId();
-                tutorialDb.removeFavTutorial(tid);
-                savedTutorialAdapter.updateState(position);
-            }
-        };
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(savedTutorialRecyclerView);
+            ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+
+                @Override
+                public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                    snack.show();
+
+                    int position = viewHolder.getAdapterPosition();
+                    String tid = savedTutorialAdapter.savedTuts.get(position).getId();
+                    tutorialDb.removeFavTutorial(tid);
+                    savedTutorialAdapter.updateState(position);
+                    if (savedTutorialAdapter.getItemCount() == 0) {
+                        componentVisibleListener.onErrorFound(true, "No saved tutorials");
+                    }
+                }
+            };
+
+            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+            itemTouchHelper.attachToRecyclerView(savedTutorialRecyclerView);
+
+            snack.addCallback(new Snackbar.Callback() {
+
+                @Override
+                public void onDismissed(Snackbar snackbar, int event) {
+                    if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT) {
+                        // Snackbar closed on its own
+                    }
+                }
+
+                @Override
+                public void onShown(Snackbar snackbar) {
+
+                }
+            });
+
+            componentVisibleListener.onErrorFound(false, "");
+        } else {
+            componentVisibleListener.onErrorFound(true, "No saved tutorials");
+        }
 
     }
 

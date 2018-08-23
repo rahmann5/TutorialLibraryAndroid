@@ -11,10 +11,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.naziur.tutoriallibraryandroid.fragment.CategoryFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.FeedbackFragment;
@@ -26,7 +26,6 @@ import com.example.naziur.tutoriallibraryandroid.fragment.SearchFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.TutorialsFragment;
 import com.example.naziur.tutoriallibraryandroid.utility.AppRater;
 import com.example.naziur.tutoriallibraryandroid.utility.Constants;
-import com.example.naziur.tutoriallibraryandroid.utility.ProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +38,14 @@ import yalantis.com.sidemenu.model.SlideMenuItem;
 import yalantis.com.sidemenu.util.ViewAnimator;
 
 
-public class MainActivity extends AppCompatActivity implements ViewAnimator.ViewAnimatorListener{
+public class MainActivity extends AppCompatActivity implements ViewAnimator.ViewAnimatorListener, MainFragment.OnComponentVisibleListener {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private List<SlideMenuItem> list = new ArrayList<>();
     private MainFragment mainFragment;
     private ViewAnimator viewAnimator;
-    private LinearLayout linearLayout;
+    private LinearLayout linearLayout, mainContent;
+    private TextView errorText;
 
 
     @Override
@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             }
         });
 
+        mainContent = (LinearLayout) findViewById(R.id.content_frame);
+        errorText = (TextView) findViewById(R.id.error_text);
 
         setActionBar();
         createMenuList();
@@ -83,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(Constants.CLOSE, R.drawable.icn_close);
         list.add(menuItem0);
-        Fragment frag = getSupportFragmentManager().findFragmentById(R.id.content_frame);
         SlideMenuItem menuItem = new SlideMenuItem(Constants.HOME, R.drawable.ic_home);
         list.add(menuItem);
         SlideMenuItem menuItem1 = new SlideMenuItem(Constants.TUTORIAL, R.drawable.ic_tutorial);
@@ -220,17 +221,35 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
     private MainFragment preventSameFragmentStacking (MainFragment fragment) {
         Fragment current = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+
         if (!current.getClass().equals(fragment.getClass())) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             final String tag = fragment.getClass().getSimpleName();
             transaction.addToBackStack(tag);
             transaction.replace(R.id.content_frame, fragment, tag);
             transaction.commit();
-        }
 
+        }
         return fragment;
     }
 
 
+    @Override
+    public void onErrorFound(boolean error, String errorMsg) {
+        if (!error) {
+            mainContent.setVisibility(View.VISIBLE);
+            errorText.setVisibility(View.GONE);
+        } else {
+            errorText.setVisibility(View.VISIBLE);
+            errorText.setText(errorMsg);
+            mainContent.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void resetLayout() {
+        mainContent.setVisibility(View.GONE);
+        mainContent.setVisibility(View.GONE);
+    }
 }
 

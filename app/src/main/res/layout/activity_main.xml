@@ -17,11 +17,22 @@
             android:orientation="vertical"/>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/content_frame"
             android:layout_marginTop="?attr/actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/error_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="25sp"
+            android:text="Error"
+            />
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"

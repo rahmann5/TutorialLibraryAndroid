@@ -11,4 +11,6 @@
     <color name="tutorial_view_btn_bg">#000000</color>
     <color name="tutorial_viewer_bg">#b6b4b4</color>
     <color name="title_dialog_bck_1">#ffbb32</color>
+    <color name="list_item_bck_1">#e1dede</color>
+    <color name="list_view_bck_1">#eae5e5</color>
 </resources>

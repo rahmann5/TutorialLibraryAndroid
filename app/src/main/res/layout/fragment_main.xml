@@ -27,7 +27,8 @@
                     android:layout_height="128dp"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -51,7 +52,8 @@
                     android:layout_height="128dp"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -83,7 +85,8 @@
                     android:layout_height="128dp"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -107,7 +110,8 @@
                     android:layout_height="128dp"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -139,7 +143,8 @@
                     android:layout_height="128dp"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -163,7 +168,8 @@
                     android:layout_height="128dp"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -195,7 +201,8 @@
                     android:layout_height="128dp"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -219,7 +226,8 @@
                     android:layout_height="128dp"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground">
 
                     <ImageView
                         android:layout_width="wrap_content"

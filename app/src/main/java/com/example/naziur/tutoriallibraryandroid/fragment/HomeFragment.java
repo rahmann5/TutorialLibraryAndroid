@@ -2,13 +2,13 @@ package com.example.naziur.tutoriallibraryandroid.fragment;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.naziur.tutoriallibraryandroid.MainActivity;
 import com.example.naziur.tutoriallibraryandroid.R;
 import com.example.naziur.tutoriallibraryandroid.utility.Constants;
 
@@ -31,7 +31,10 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setComponentVisibleListener();
         View v = inflater.inflate(R.layout.fragment_main, container, false);
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.title_home));
+
         tutorialBtn = (LinearLayout) v.findViewById(R.id.tutorial);
         categoryBtn = (LinearLayout) v.findViewById(R.id.category);
         myTutorialBtn = (LinearLayout) v.findViewById(R.id.my_tutorials);
@@ -49,6 +52,9 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
         searchBtn.setOnClickListener(this);
         settingBtn.setOnClickListener(this);
         feedbackBtn.setOnClickListener(this);
+
+        componentVisibleListener.onErrorFound(false, "");
+
         return v;
     }
 

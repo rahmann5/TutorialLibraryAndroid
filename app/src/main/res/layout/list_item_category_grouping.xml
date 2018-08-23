@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/list_item_bck_1">
 
     <TextView
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:text="A"
         android:id="@+id/categoryLetter"
-        android:textSize="22sp"
+        android:textSize="25sp"
         android:padding="5dp"
         android:background="@drawable/circle_fill_shape"
         android:textAlignment="center"
