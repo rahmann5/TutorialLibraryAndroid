@@ -43,6 +43,8 @@ public class AboutFragment extends MainFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setActionBarTitle(getString(R.string.title_about));
+        setComponentVisibleListener();
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_about, container, false);
         ImageView iv  = (ImageView)rootView.findViewById(R.id.expandedImage);
@@ -73,7 +75,7 @@ public class AboutFragment extends MainFragment {
         webWv.loadDataWithBaseURL(null, getString(R.string.website_html), "text/html", "utf-8", null);
         authorsWv.setBackgroundColor(Color.TRANSPARENT);
         authorsWv.loadDataWithBaseURL(null, getString(R.string.authors_html), "text/html", "utf-8", null);
-
+        componentVisibleListener.onErrorFound(false, "");
         return rootView;
     }
 

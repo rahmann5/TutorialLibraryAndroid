@@ -61,6 +61,9 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                Bundle savedInstanceState) {
+        setActionBarTitle(getString(R.string.title_search));
+        setComponentVisibleListener();
+        componentVisibleListener.resetLayout();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         progressDialog = new ProgressDialog(getActivity(), R.layout.progress_dialog, true);
@@ -161,14 +164,10 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
                     // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
                     // because this activity implements the LoaderCallbacks interface).
                     loaderManager.restartLoader(SEARCH_TUTORIAL_LOADER_ID, null, this);
+                    componentVisibleListener.onErrorFound(false, "");
                 } else {
                     // Otherwise, display error
-                    // First, hide loading indicator so error message will be visible
-                    //View loadingIndicator = findViewById(R.id.loading_indicator);
-                    //loadingIndicator.setVisibility(View.GONE);
-
-                    // Update empty state with no connection error message
-                    //mEmptyStateTextView.setText(R.string.no_internet_connection);
+                    componentVisibleListener.onErrorFound(true, "No network connection");
                 }
         }
     }
@@ -176,6 +175,7 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
     @Override
     public void onFailedRequestListener(String command, String... s) {
         progressDialog.toggleDialog(false);
+        componentVisibleListener.onErrorFound(true, s[0]);
     }
 
     @Override

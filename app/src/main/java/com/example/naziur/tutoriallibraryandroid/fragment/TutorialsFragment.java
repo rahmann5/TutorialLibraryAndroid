@@ -54,6 +54,9 @@ public class TutorialsFragment extends MainFragment implements LoaderManager.Loa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
+        setActionBarTitle(getString(R.string.title_all_tuts));
+        setComponentVisibleListener();
+        componentVisibleListener.resetLayout();
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_tutorials, container, false);
         ServerRequestManager.setOnRequestCompleteListener(this);
@@ -148,14 +151,10 @@ public class TutorialsFragment extends MainFragment implements LoaderManager.Loa
                     // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
                     // because this activity implements the LoaderCallbacks interface).
                     loaderManager.restartLoader(TUTORIAL_LOADER_ID, null, this);
+                    componentVisibleListener.onErrorFound(false, "");
                 } else {
                     // Otherwise, display error
-                    // First, hide loading indicator so error message will be visible
-                    //View loadingIndicator = findViewById(R.id.loading_indicator);
-                    //loadingIndicator.setVisibility(View.GONE);
-
-                    // Update empty state with no connection error message
-                    //mEmptyStateTextView.setText(R.string.no_internet_connection);
+                    componentVisibleListener.onErrorFound(true, "No network connection");
                 }
         }
     }
@@ -163,5 +162,6 @@ public class TutorialsFragment extends MainFragment implements LoaderManager.Loa
     @Override
     public void onFailedRequestListener(String command, String... s) {
         progressDialog.toggleDialog(true);
+        componentVisibleListener.onErrorFound(true, s[0]);
     }
 }
