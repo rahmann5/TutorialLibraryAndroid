@@ -76,7 +76,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
                 break;
 
             case R.id.about :
-                Toast.makeText(getActivity(),"clicked about",Toast.LENGTH_LONG).show();
+                mainFragment = AboutFragment.newInstance();
                 break;
 
             case R.id.search :

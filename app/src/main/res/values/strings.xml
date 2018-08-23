@@ -13,6 +13,22 @@
     <string name="search_title">Search</string>
     <string name="search_hint">Search here...</string>
 
+
+    <string name="aims_html"><![CDATA[Our aim is simple and is broken into three key goals:<ul>
+				<li>Everthing, one place</li>
+				<li>Easy to understand</li>
+				<li>Community involvment</li>
+			</ul>]]></string>
+
+    <string name="website_html"><![CDATA[Visit us at our website: <a href = \'https://tutoriallibrary.000webhostapp.com/\'>tutoriallibrary</a>]]></string>
+
+    <string name="authors_html"><![CDATA[
+        <table>
+        <tr><th>Naziur Rahman</th><td>(BSc Computer Science)</td></tr>
+        <tr><th>Hamidur Rahman</th><td>(BSc Computer Science)</td></tr>
+        </table>
+]]></string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="fav_tut">Fav</string>
     <string name="unfav_tut">UnFav</string>
