@@ -61,7 +61,6 @@ public class SavedTutorialFragment extends MainFragment {
 
             final Snackbar snack = Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.undo_text, Snackbar.LENGTH_LONG);
 
-
             ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
                 @Override
@@ -105,7 +104,7 @@ public class SavedTutorialFragment extends MainFragment {
 
             componentVisibleListener.onErrorFound(false, "");
         } else {
-            componentVisibleListener.onErrorFound(true, "No saved tutorials");
+            componentVisibleListener.onErrorFound(true, "No saved tutorials found.");
         }
 
     }
