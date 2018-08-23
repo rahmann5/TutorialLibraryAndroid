@@ -146,12 +146,14 @@
                 android:layout_below="@id/contents"
                 android:layout_margin="8dp"
                 app:cardElevation="8dp"
-                app:contentPadding="5dp"
+                android:background="@drawable/about_gradient"
                 >
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="3dp">>
+                    android:padding="3dp"
+                    android:background="@drawable/about_gradient"
+                    >
                 <LinearLayout
                     android:id="@+id/title_card1"
                     android:layout_width="match_parent"
@@ -165,6 +167,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:text="Aims"
                         android:layout_gravity="center_vertical"
                         android:textSize="25sp"/>
@@ -173,6 +176,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:id="@+id/aims_contents"
                     android:layout_below="@id/title_card1"
                     />
@@ -187,12 +191,12 @@
                 android:layout_below="@id/content1"
                 android:layout_margin="8dp"
                 app:cardElevation="8dp"
-                app:contentPadding="5dp"
                 >
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="3dp">>
+                    android:padding="3dp"
+                    android:background="@drawable/about_gradient">
                     <LinearLayout
                         android:id="@+id/title_card2"
                         android:layout_width="match_parent"
@@ -207,6 +211,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Web"
+                            android:textColor="@color/white"
                             android:layout_gravity="center_vertical"
                             android:textSize="25sp"/>
                     </LinearLayout>
@@ -216,6 +221,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/website_contents"
                         android:layout_below="@id/title_card2"
+                        android:textColor="@color/white"
                         />
                 </RelativeLayout>
 
@@ -227,12 +233,12 @@
                 android:layout_below="@id/content2"
                 android:layout_margin="8dp"
                 app:cardElevation="8dp"
-                app:contentPadding="5dp"
                 >
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="2dp">
+                    android:padding="3dp"
+                    android:background="@drawable/about_gradient">
                     <LinearLayout
                         android:id="@+id/title_card3"
                         android:layout_width="match_parent"
@@ -247,6 +253,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Authors"
+                            android:textColor="@color/white"
                             android:layout_gravity="center_vertical"
                             android:textSize="25sp"/>
                     </LinearLayout>

@@ -146,6 +146,7 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
     public void onSuccessfulRequestListener(String command, String... s) {
         switch (command){
             case ServerRequestManager.COMMAND_SEARCH_FOR_TUTORIAL:
+                progressDialog.toggleDialog(false);
                 json = s[0];
                 //System.out.println(json);
                 // Get a reference to the ConnectivityManager to check state of network connectivity

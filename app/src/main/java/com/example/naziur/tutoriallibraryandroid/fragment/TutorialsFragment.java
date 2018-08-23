@@ -161,7 +161,7 @@ public class TutorialsFragment extends MainFragment implements LoaderManager.Loa
 
     @Override
     public void onFailedRequestListener(String command, String... s) {
-        progressDialog.toggleDialog(true);
+        progressDialog.toggleDialog(false);
         componentVisibleListener.onErrorFound(true, s[0]);
     }
 }
