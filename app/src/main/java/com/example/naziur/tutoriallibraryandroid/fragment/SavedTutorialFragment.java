@@ -25,7 +25,7 @@ public class SavedTutorialFragment extends MainFragment {
     private TutorialDBHelper tutorialDb;
     private RecyclerView savedTutorialRecyclerView;
     private SavedTutorialAdapter savedTutorialAdapter;
-
+    private int position;
 
     public SavedTutorialFragment() {
         // Required empty public constructor
@@ -59,7 +59,7 @@ public class SavedTutorialFragment extends MainFragment {
             savedTutorialRecyclerView.setLayoutManager(mLayoutManager);
             savedTutorialRecyclerView.setAdapter(savedTutorialAdapter);
 
-            final Snackbar snack = Snackbar.make(getView(), "UNDO", Snackbar.LENGTH_LONG);
+            final Snackbar snack = Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.undo_text, Snackbar.LENGTH_LONG);
 
 
             ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
@@ -71,14 +71,14 @@ public class SavedTutorialFragment extends MainFragment {
 
                 @Override
                 public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                    snack.show();
-
-                    int position = viewHolder.getAdapterPosition();
-                    String tid = savedTutorialAdapter.savedTuts.get(position).getId();
-                    tutorialDb.removeFavTutorial(tid);
-                    savedTutorialAdapter.updateState(position);
-                    if (savedTutorialAdapter.getItemCount() == 0) {
-                        componentVisibleListener.onErrorFound(true, "No saved tutorials");
+                    if (!snack.isShown()) {
+                        snack.show();
+                        position = viewHolder.getAdapterPosition();
+                    } else {
+                        snack.dismiss();
+                        removeItemFromDb ();
+                        position = viewHolder.getAdapterPosition();
+                        snack.show();
                     }
                 }
             };
@@ -91,7 +91,7 @@ public class SavedTutorialFragment extends MainFragment {
                 @Override
                 public void onDismissed(Snackbar snackbar, int event) {
                     if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT) {
-                        // Snackbar closed on its own
+                        removeItemFromDb ();
                     }
                 }
 
@@ -101,6 +101,8 @@ public class SavedTutorialFragment extends MainFragment {
                 }
             });
 
+            snack.setAction("UNDO", new UndoListener(snack, savedTutorialAdapter));
+
             componentVisibleListener.onErrorFound(false, "");
         } else {
             componentVisibleListener.onErrorFound(true, "No saved tutorials");
@@ -108,10 +110,36 @@ public class SavedTutorialFragment extends MainFragment {
 
     }
 
+    private void removeItemFromDb () {
+        String tid = savedTutorialAdapter.savedTuts.get(position).getId();
+        tutorialDb.removeFavTutorial(tid);
+        savedTutorialAdapter.updateState(position);
+        if (savedTutorialAdapter.getItemCount() == 0) {
+            componentVisibleListener.onErrorFound(true, "No saved tutorials");
+        }
+    }
+
     @Override
     public void onDestroy() {
         tutorialDb.close();
         super.onDestroy();
+    }
+
+    private class UndoListener implements View.OnClickListener{
+
+        Snackbar bar;
+        SavedTutorialAdapter adapter;
+
+        public UndoListener (Snackbar bar, SavedTutorialAdapter adapter) {
+            this.bar = bar;
+            this.adapter = adapter;
+        }
+
+        @Override
+        public void onClick(View v) {
+            bar.dismiss();
+            this.adapter.notifyDataSetChanged();
+        }
     }
 
 }

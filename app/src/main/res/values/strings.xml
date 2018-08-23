@@ -33,6 +33,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="fav_tut">Fav</string>
     <string name="unfav_tut">UnFav</string>
+    <string name="undo_text">1 item has been removed.</string>
 
     <!-- Remove glide dependency from setTag of ImageView -->
     <item name="glide_tag" type="id" />
