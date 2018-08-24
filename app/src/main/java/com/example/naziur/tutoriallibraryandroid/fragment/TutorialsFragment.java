@@ -40,11 +40,7 @@ public class TutorialsFragment extends MainFragment implements LoaderManager.Loa
     private String tagId;
     private String json;
 
-    /**
-     * Constant value for the earthquake loader ID. We can choose any integer.
-     * This really only comes into play if you're using multiple loaders.
-     */
-    private static final int TUTORIAL_LOADER_ID = 1;
+    private static final int TUTORIAL_LOADER_ID = 25;
 
     public static TutorialsFragment newInstance() {
         TutorialsFragment tutorialsFragment = new TutorialsFragment();
@@ -156,6 +152,10 @@ public class TutorialsFragment extends MainFragment implements LoaderManager.Loa
                     // Otherwise, display error
                     componentVisibleListener.onErrorFound(true, "No network connection");
                 }
+                break;
+            default: componentVisibleListener.onErrorFound(true, s[0]);
+                break;
+
         }
     }
 

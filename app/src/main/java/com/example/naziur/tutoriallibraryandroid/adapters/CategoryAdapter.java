@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.naziur.tutoriallibraryandroid.model.CategoryModel;
@@ -91,15 +92,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private static class CategoryItemHolder extends RecyclerView.ViewHolder {
         private TextView categoryName;
-
+        private LinearLayout categoryItem;
         public CategoryItemHolder(View itemView) {
             super(itemView);
             categoryName = (TextView) itemView.findViewById(R.id.categoryName);
+            categoryItem = (LinearLayout) itemView.findViewById(R.id.category_item);
         }
 
         void bind (Context context, final CategoryModel categoryModel) {
             categoryName.setText(categoryModel.getText());
-            categoryName.setOnClickListener(new View.OnClickListener() {
+            categoryItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     listener.onViewClick(false, categoryModel.getId());

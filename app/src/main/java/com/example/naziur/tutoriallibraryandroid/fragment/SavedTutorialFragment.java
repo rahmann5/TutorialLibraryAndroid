@@ -70,14 +70,12 @@ public class SavedTutorialFragment extends MainFragment {
 
                 @Override
                 public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                    if (!snack.isShown()) {
-                        System.out.println("not on screen");
-                        position = viewHolder.getAdapterPosition();
-                    } else {
-                        System.out.println("already on screen");
+
+                    if (snack.isShown()) {
                         removeItemFromDb (snack);
-                        position = viewHolder.getAdapterPosition();
                     }
+                    position = viewHolder.getAdapterPosition();
+
                     snack.show();
                 }
             };
@@ -99,8 +97,8 @@ public class SavedTutorialFragment extends MainFragment {
             @Override
             public void onDismissed(Snackbar snackbar, int event) {
                 if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT) {
-                    System.out.println("snack bar timed out");
                     removeItemFromDb (snack);
+                    savedTutorialAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -123,8 +121,6 @@ public class SavedTutorialFragment extends MainFragment {
         if (savedTutorialAdapter.getItemCount() == 0) {
             componentVisibleListener.onErrorFound(true, "No saved tutorials");
         }
-        savedTutorialAdapter.notifyDataSetChanged();
-        s.dismiss();
     }
 
     @Override

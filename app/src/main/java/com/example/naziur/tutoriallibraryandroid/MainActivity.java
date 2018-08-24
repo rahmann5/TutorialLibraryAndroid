@@ -16,6 +16,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.naziur.tutoriallibraryandroid.fragment.AboutFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.CategoryFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.FeedbackFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.HomeFragment;
@@ -210,6 +211,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 bundle.putString(Constants.FRAGMENT_KEY_TUT_ID, Constants.RANDOM);
                 fragment.setArguments(bundle);
                 return fragment;
+            case Constants.ABOUT:
+                return AboutFragment.newInstance();
             case Constants.SEARCH:
                 return SearchFragment.newInstance();
             case Constants.FEEDBACK:
