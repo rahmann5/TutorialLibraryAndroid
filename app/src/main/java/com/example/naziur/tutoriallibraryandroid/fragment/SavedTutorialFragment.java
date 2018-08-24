@@ -26,7 +26,7 @@ public class SavedTutorialFragment extends MainFragment {
     private RecyclerView savedTutorialRecyclerView;
     private SavedTutorialAdapter savedTutorialAdapter;
     private int position;
-
+    private Snackbar snack;
     public SavedTutorialFragment() {
         // Required empty public constructor
     }
@@ -59,7 +59,7 @@ public class SavedTutorialFragment extends MainFragment {
             savedTutorialRecyclerView.setLayoutManager(mLayoutManager);
             savedTutorialRecyclerView.setAdapter(savedTutorialAdapter);
 
-            final Snackbar snack = makeSnack();
+            snack = makeSnack();
 
             ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
@@ -70,12 +70,10 @@ public class SavedTutorialFragment extends MainFragment {
 
                 @Override
                 public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-
                     if (snack.isShown()) {
-                        removeItemFromDb (snack);
+                        removeItemFromDb ();
                     }
                     position = viewHolder.getAdapterPosition();
-
                     snack.show();
                 }
             };
@@ -97,7 +95,7 @@ public class SavedTutorialFragment extends MainFragment {
             @Override
             public void onDismissed(Snackbar snackbar, int event) {
                 if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT) {
-                    removeItemFromDb (snack);
+                    removeItemFromDb ();
                     savedTutorialAdapter.notifyDataSetChanged();
                 }
             }
@@ -113,9 +111,27 @@ public class SavedTutorialFragment extends MainFragment {
         return snack;
     }
 
-    private void removeItemFromDb (Snackbar s) {
+    @Override
+    public void onStart() {
+        if (savedTutorialAdapter!= null && savedTutorialAdapter.getItemCount() == 0) {
+            componentVisibleListener.onErrorFound(true, "No saved tutorials");
+        }
+        super.onStart();
+
+    }
+
+    @Override
+    public void onStop() {
+        if (snack != null && snack.isShown()) {
+            removeItemFromDb ();
+            snack.dismiss();
+        }
+        super.onStop();
+
+    }
+
+    private void removeItemFromDb () {
         String tid = savedTutorialAdapter.savedTuts.get(position).getId();
-        System.out.println("removeItemFromDb " + tid);
         tutorialDb.removeFavTutorial(tid);
         savedTutorialAdapter.updateState(position);
         if (savedTutorialAdapter.getItemCount() == 0) {
