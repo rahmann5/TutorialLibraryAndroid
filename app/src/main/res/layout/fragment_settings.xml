@@ -14,4 +14,39 @@
         android:layout_height="wrap_content"
         android:id="@+id/theme_spinner"></Spinner>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/language_settings"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/language_warning_settings"
+                android:textSize="11sp"
+                android:textColor="@color/warning"/>
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/lang_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
+
 </LinearLayout>

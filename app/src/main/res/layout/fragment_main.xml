@@ -23,8 +23,8 @@
 
                 <LinearLayout
                     android:id="@+id/tutorial"
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:clickable="true"
@@ -42,14 +42,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="View Tutorials"
+                        android:text="@string/op1_view_tuts"
                         android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/category"
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:clickable="true"
@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Categories"
+                        android:text="@string/op2_categories"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -81,8 +81,8 @@
 
                 <LinearLayout
                     android:id="@+id/my_tutorials"
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:clickable="true"
@@ -100,14 +100,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="My Tutorials"
+                        android:text="@string/op3_my_tuts"
                         android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/random"
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:clickable="true"
@@ -124,7 +124,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Random Tutorial"
+                        android:text="@string/op4_rand_tut"
                         android:textAlignment="center"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -139,8 +139,8 @@
 
                 <LinearLayout
                     android:id="@+id/about"
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:clickable="true"
@@ -158,14 +158,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="About"
+                        android:text="@string/op5_about"
                         android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/search"
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:clickable="true"
@@ -183,7 +183,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Search"
+                        android:text="@string/op6_search"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -197,8 +197,8 @@
 
                 <LinearLayout
                     android:id="@+id/settings"
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:clickable="true"
@@ -216,14 +216,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Settings"
+                        android:text="@string/op7_settings"
                         android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/feedack"
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:clickable="true"
@@ -241,7 +241,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Feedback"
+                        android:text="@string/op8_feedback"
                         android:textSize="14sp" />
                 </LinearLayout>
 

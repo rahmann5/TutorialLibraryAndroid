@@ -47,7 +47,7 @@
             android:textSize="15sp"
             android:background="#77b3d6"
             android:padding="15dp"
-            android:text="Rate"
+            android:text="@string/feedback_rate"
             />
 
         <Button
@@ -60,7 +60,7 @@
             android:textSize="15sp"
             android:background="#77b3d6"
             android:padding="15dp"
-            android:text="Later"
+            android:text="@string/feedback_later"
             />
 
         <Button
@@ -73,7 +73,7 @@
             android:textSize="15sp"
             android:background="#77b3d6"
             android:padding="15dp"
-            android:text="No"
+            android:text="@string/feedback_no"
             />
 
     </LinearLayout>

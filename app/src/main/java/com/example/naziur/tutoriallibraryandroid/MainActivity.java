@@ -32,6 +32,7 @@ import com.example.naziur.tutoriallibraryandroid.fragment.TutorialsFragment;
 import com.example.naziur.tutoriallibraryandroid.utility.AppRater;
 import com.example.naziur.tutoriallibraryandroid.utility.Constants;
 import com.example.naziur.tutoriallibraryandroid.utility.ThemeManager;
+import com.example.naziur.tutoriallibraryandroid.utility.LocaleManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +93,11 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         setActionBar();
         createMenuList();
         viewAnimator = new ViewAnimator<>(this, list, mainFragment, drawerLayout, this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleManager.setLocale(base));
     }
 
     private void createMenuList() {

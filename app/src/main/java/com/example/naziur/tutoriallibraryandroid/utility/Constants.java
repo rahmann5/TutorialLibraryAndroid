@@ -23,4 +23,7 @@ public class Constants {
 
     public static final String ASSETS_URL_IMG_DIR = "http://tutoriallibrary.000webhostapp.com/assets/images/";
     public static final String ASSETS_URL_IMG_DEFULT = "http://tutoriallibrary.000webhostapp.com/assets/images/default/";
+
+    public static final  String LANGUAGE_ENGLISH   = "en";
+    public static final String LANGUAGE_KEY       = "language_key";
 }
