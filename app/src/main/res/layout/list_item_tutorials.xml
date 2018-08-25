@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/tags_text_colour"
                     android:background="@color/tutorial_view_btn_bg"
-                    android:text="View Tutorial"
+                    android:text="@string/view_tut"
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="4dp"
                     android:layout_marginBottom="4dp"

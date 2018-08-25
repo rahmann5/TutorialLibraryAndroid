@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Biblioteca De Tutoriales</string>
+    <string name="aims_abt">Objetivos</string>
+    <string name="aims_html"><![CDATA[Nuestro objetivo es simple y se divide en tres objetivos clave:<ul> 				<li>Todo, un lugar</li> 				<li>Fácil de comprender</li> 				<li>Participación de la comunidad </li> 			</ul>]]></string>
+    <string name="auth_abt">Autores</string>
+    <string name="by">Por:</string>
+    <string name="feedback_later">Luego</string>
+    <string name="feedback_msg">Si está disfrutando de la Biblioteca Tutorial, tómese un momento para calificarla.</string>
+    <string name="feedback_no">No</string>
+    <string name="feedback_rate">Tarifa</string>
+    <string name="no_tutorials_found">No se encontraron tutoriales</string>
+    <string name="online">Ver en línea</string>
+    <string name="op1_view_tuts">Ver Tutoriales</string>
+    <string name="op2_categories">Categorías</string>
+    <string name="op3_my_tuts">Mis Tutoriales</string>
+    <string name="op4_rand_tut">Tutorial Aleatorio</string>
+    <string name="op5_about">Acerca De</string>
+    <string name="op6_search">Buscar</string>
+    <string name="op7_settings">Configuraciones</string>
+    <string name="op8_feedback">Realimentación</string>
+    <string name="posted">Al Corriente:</string>
+    <string name="ref">Referencias:</string>
+    <string name="search_hint">Busca Aquí...</string>
+    <string name="server_error">Error</string>
+    <string name="tags_text">Etiquetas:</string>
+    <string name="title_about">Acerca De</string>
+    <string name="title_all_tuts">Tutoriales</string>
+    <string name="title_categories">Categorías</string>
+    <string name="title_feedback">Realimentación</string>
+    <string name="title_home">Biblioteca De Tutoriales</string>
+    <string name="title_saved_tut">Mis Tutoriales</string>
+    <string name="title_search">Buscar</string>
+    <string name="title_settings">Configuraciones</string>
+    <string name="undo_text">1 artículo ha sido eliminado.</string>
+    <string name="view_tut">Ver Tutorial</string>
+    <string name="web_abt">Web</string>
+    <string name="website_html"><![CDATA[Visítanos en nuestro sitio web: <a href = \'https://tutoriallibrary.000webhostapp.com/\'>tutoriallibrary</a>]]></string>
+</resources>

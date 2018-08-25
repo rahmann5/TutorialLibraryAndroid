@@ -42,7 +42,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="View Tutorials"
+                        android:text="@string/op1_view_tuts"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Categories"
+                        android:text="@string/op2_categories"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -100,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="My Tutorials"
+                        android:text="@string/op3_my_tuts"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -124,7 +124,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Random Tutorial"
+                        android:text="@string/op4_rand_tut"
                         android:textAlignment="center"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -158,7 +158,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="About"
+                        android:text="@string/op5_about"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -183,7 +183,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Search"
+                        android:text="@string/op6_search"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -216,7 +216,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Settings"
+                        android:text="@string/op7_settings"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -241,7 +241,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Feedback"
+                        android:text="@string/op8_feedback"
                         android:textSize="14sp" />
                 </LinearLayout>
 

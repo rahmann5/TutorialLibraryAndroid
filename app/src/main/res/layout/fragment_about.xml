@@ -186,7 +186,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="Aims"
+                        android:text="@string/aims_abt"
                         android:layout_gravity="center_vertical"
                         android:textSize="25sp"/>
                 </LinearLayout>
@@ -228,7 +228,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Web"
+                            android:text="@string/web_abt"
                             android:textColor="@color/white"
                             android:layout_gravity="center_vertical"
                             android:textSize="25sp"/>
@@ -270,7 +270,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Authors"
+                            android:text="@string/auth_abt"
                             android:textColor="@color/white"
                             android:layout_gravity="center_vertical"
                             android:textSize="25sp"/>
