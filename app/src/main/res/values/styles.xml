@@ -1,5 +1,11 @@
 <resources>
 
+    <style name="LightTheme" parent="@android:style/Theme.Light">
+    </style>
+
+    <style name="BlackTheme" parent="@android:style/Theme.Black">
+    </style>
+
     <!-- Base application theme. -->
     <style name="AppTheme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
