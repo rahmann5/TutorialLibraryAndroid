@@ -7,4 +7,9 @@
         <item>Author</item>
     </string-array>
 
+    <string-array name="themes">
+        <item>Light Theme</item>
+        <item>Black Theme</item>
+    </string-array>
+
 </resources>

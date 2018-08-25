@@ -19,6 +19,8 @@ public class Constants {
     public static final String FRAGMENT_KEY_TUT_ID = "tut_id";
     public static final String FRAGMENT_KEY_TAG_ID = "tag_id";
 
+    public static final String THEME_PREF_KEY = "chosen_theme";
+
     public static final String ASSETS_URL_IMG_DIR = "http://tutoriallibrary.000webhostapp.com/assets/images/";
     public static final String ASSETS_URL_IMG_DEFULT = "http://tutoriallibrary.000webhostapp.com/assets/images/default/";
 }

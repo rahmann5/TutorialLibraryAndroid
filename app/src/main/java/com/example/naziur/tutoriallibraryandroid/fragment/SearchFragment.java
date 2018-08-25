@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.naziur.tutoriallibraryandroid.R;
 import com.example.naziur.tutoriallibraryandroid.adapters.TutorialAdapter;
@@ -42,6 +43,7 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
 
     private TutorialAdapter mTutorialAdapter;
     private LinearLayoutManager mLayoutManager;
+    private TextView emptyPageTv;
     private String json;
     /**
      * Constant value for the earthquake loader ID. We can choose any integer.
@@ -66,6 +68,7 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
         componentVisibleListener.resetLayout();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+        emptyPageTv = (TextView) view.findViewById(R.id.empty_state);
         progressDialog = new ProgressDialog(getActivity(), R.layout.progress_dialog, true);
         RecyclerView mRecyclerView = view.findViewById(R.id.result_recycle_view);
         mTutorialAdapter = new TutorialAdapter(getContext(), new TutorialAdapter.ViewClickListener() {
@@ -188,6 +191,10 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
     public void onLoadFinished(Loader<List<TutorialModel>> loader, List<TutorialModel> tutorialModels) {
         mTutorialAdapter.setTutorialModels(tutorialModels);
         mTutorialAdapter.notifyDataSetChanged();
+        if(tutorialModels.size() > 0)
+            emptyPageTv.setVisibility(View.GONE);
+        else
+            emptyPageTv.setVisibility(View.VISIBLE);
         progressDialog.toggleDialog(false);
     }
 

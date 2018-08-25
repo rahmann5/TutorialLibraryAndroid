@@ -90,7 +90,7 @@ public class HomeFragment extends MainFragment implements View.OnClickListener {
                 break;
 
             case R.id.settings :
-
+                mainFragment = SettingsFragment.newInstance();
                 break;
 
             case R.id.feedack :

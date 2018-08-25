@@ -1,5 +1,6 @@
 package com.example.naziur.tutoriallibraryandroid;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,7 @@ import com.example.naziur.tutoriallibraryandroid.fragment.SearchFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.TutorialsFragment;
 import com.example.naziur.tutoriallibraryandroid.utility.AppRater;
 import com.example.naziur.tutoriallibraryandroid.utility.Constants;
+import com.example.naziur.tutoriallibraryandroid.utility.ThemeManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +56,12 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        int chosenTheme = sharedPrefs.getInt(
+                Constants.THEME_PREF_KEY,
+                0);
+
+        ThemeManager.onActivityCreateSetTheme(this, chosenTheme);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

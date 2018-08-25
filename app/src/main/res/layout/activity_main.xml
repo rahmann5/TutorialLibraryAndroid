@@ -6,6 +6,7 @@
 
     <io.codetail.widget.RevealFrameLayout
         android:id="@+id/container_frame"
+        style="?pageBackground"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
