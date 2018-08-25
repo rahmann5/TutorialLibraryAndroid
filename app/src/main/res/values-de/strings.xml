@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tutorenkurs Bibliothek</string>
+    <string name="aims_abt">Ziele</string>
+    <string name="aims_html"><![CDATA[Unser Ziel ist einfach und wird in drei Schlüsselabsichten gebrochen:<ul> 				<li>Everthing, ein Platz</li> 				<li>Leicht zu verstehen</li> 				<li>Gemeinschaft involvment</li> 			</ul>]]></string>
+    <string name="array_auth">Autor</string>
+    <string name="array_tag">Anhängsel</string>
+    <string name="array_title">Titel</string>
+    <string name="auth_abt">Autoren</string>
+    <string name="by">Durch:</string>
+    <string name="feedback_msg">Wenn Ihnen die Tutorial-Bibliothek gefällt, nehmen Sie sich bitte einen Moment Zeit, um sie zu bewerten.</string>
+    <string name="feedback_no">Nein</string>
+    <string name="feedback_rate">Bewertung</string>
+    <string name="language_settings">Aktuelle Sprache:</string>
+    <string name="language_warning_settings">Warnung: Wenn Sie die Sprache ändern, wird die Anwendung neu gestartet.</string>
+    <string name="no_tutorials_found">Keine Tutorials gefunden</string>
+    <string name="online">Siehe Online</string>
+    <string name="op1_view_tuts">Lernprogramme anzeigen</string>
+    <string name="op2_categories">Kategorien</string>
+    <string name="op3_my_tuts">Meine Tutorials</string>
+    <string name="op4_rand_tut">Zufälliges Tutorial</string>
+    <string name="op5_about">Über</string>
+    <string name="op6_search">Suche</string>
+    <string name="op7_settings">Die Einstellungen</string>
+    <string name="op8_feedback">Feedback</string>
+    <string name="posted">Gesendet:</string>
+    <string name="ref">Verweise:</string>
+    <string name="search_hint">Suche hier...</string>
+    <string name="server_error">Error</string>
+    <string name="tags_text">Anhängsel:</string>
+    <string name="title_about">Über</string>
+    <string name="title_all_tuts">Anleitung</string>
+    <string name="title_categories">Kategorien</string>
+    <string name="title_feedback">Feedback</string>
+    <string name="title_home">Tutorenkurs Bibliothek</string>
+    <string name="title_saved_tut">Meine Tutorials</string>
+    <string name="title_search">Suche</string>
+    <string name="title_settings">Die Einstellungen</string>
+    <string name="undo_text">1 Gegenstand wurde entfernt.</string>
+    <string name="view_tut">Lernprogramm anzeigen</string>
+    <string name="web_abt">Webseite</string>
+    <string name="website_html"><![CDATA[Besuchen Sie uns auf unserer Website: <a href = \'https://tutoriallibrary.000webhostapp.com/\'>tutoriallibrary</a>]]></string>
+    <string name="feedback_later">Später</string>
+</resources>

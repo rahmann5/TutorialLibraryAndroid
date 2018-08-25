@@ -1,5 +1,8 @@
 package com.example.naziur.tutoriallibraryandroid;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -22,11 +25,13 @@ import com.example.naziur.tutoriallibraryandroid.fragment.FeedbackFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.HomeFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.MainFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.SavedTutorialFragment;
+import com.example.naziur.tutoriallibraryandroid.fragment.SettingsFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.TutorialViewerFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.SearchFragment;
 import com.example.naziur.tutoriallibraryandroid.fragment.TutorialsFragment;
 import com.example.naziur.tutoriallibraryandroid.utility.AppRater;
 import com.example.naziur.tutoriallibraryandroid.utility.Constants;
+import com.example.naziur.tutoriallibraryandroid.utility.LocaleManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainFragment = HomeFragment.newInstance();
@@ -81,6 +87,11 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         setActionBar();
         createMenuList();
         viewAnimator = new ViewAnimator<>(this, list, mainFragment, drawerLayout, this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleManager.setLocale(base));
     }
 
     private void createMenuList() {
@@ -215,6 +226,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 return AboutFragment.newInstance();
             case Constants.SEARCH:
                 return SearchFragment.newInstance();
+            case Constants.SETTING:
+                return SettingsFragment.newInstance();
             case Constants.FEEDBACK:
                 return FeedbackFragment.newInstance();
             default:

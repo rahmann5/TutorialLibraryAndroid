@@ -36,4 +36,9 @@
     <string name="view_tut">Ver Tutorial</string>
     <string name="web_abt">Web</string>
     <string name="website_html"><![CDATA[Visítanos en nuestro sitio web: <a href = \'https://tutoriallibrary.000webhostapp.com/\'>tutoriallibrary</a>]]></string>
+    <string name="language_settings">Idioma Actual:</string>
+    <string name="array_auth">Autor</string>
+    <string name="array_tag">Etiqueta</string>
+    <string name="array_title">Título</string>
+    <string name="language_warning_settings">Advertencia: cambiar el idioma reiniciará la aplicación.</string>
 </resources>

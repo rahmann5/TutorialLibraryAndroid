@@ -2,9 +2,15 @@
 <resources>
 
     <string-array name="spinner_list_item_array">
-        <item>Title</item>
-        <item>Tag</item>
-        <item>Author</item>
+        <item>@string/array_title</item>
+        <item>@string/array_tag</item>
+        <item>@string/array_auth</item>
+    </string-array>
+
+    <string-array name="spinner_list_item_array_2">
+        <item>EN</item>
+        <item>ES</item>
+        <item>DE</item>
     </string-array>
 
 </resources>

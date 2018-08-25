@@ -38,7 +38,8 @@
 
     <!-- fragment: about  -->
     <string name="aims_html"><![CDATA[Our aim is simple and is broken into three key goals:<ul>
-				<li>Everthing, one place</li>
+				<li>
+				, one place</li>
 				<li>Easy to understand</li>
 				<li>Community involvment</li>
 			</ul>]]></string>
@@ -56,15 +57,19 @@
     <string name="auth_abt">Authors</string>
 
     <!-- fragment: settings  -->
-
+    <string name="language_settings">Current Language:</string>
+    <string name="language_warning_settings">Warning: changing the language will restart the application.</string>
 
     <!-- fragment: search  -->
     <string name="no_tutorials_found">No Tutorials Found</string>
     <string name="tags_text">Tags:</string>
     <string name="search_hint">Search here...</string>
+    <string name="array_title">Title</string>
+    <string name="array_tag">Tag</string>
+    <string name="array_auth">Author</string>
 
     <!-- fragment: feedback -->
-    <string name="feedback_msg">If your enjoying Tutorial Library, please take a momment to rate it.</string>
+    <string name="feedback_msg">If you are enjoying Tutorial Library, please take a moment to rate it.</string>
     <string name="feedback_rate">Rate</string>
     <string name="feedback_no">No</string>
     <string name="feedback_later">Later</string>

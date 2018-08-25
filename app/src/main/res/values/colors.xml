@@ -13,4 +13,5 @@
     <color name="title_dialog_bck_1">#ffbb32</color>
     <color name="list_item_bck_1">#e1dede</color>
     <color name="list_view_bck_1">#eae5e5</color>
+    <color name="warning">#fc6a6a</color>
 </resources>
