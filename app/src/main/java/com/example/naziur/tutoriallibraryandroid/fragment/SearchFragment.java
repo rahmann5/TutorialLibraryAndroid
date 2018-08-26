@@ -91,6 +91,7 @@ public class SearchFragment extends MainFragment implements ServerRequestManager
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mTutorialAdapter);
         setHasOptionsMenu(true);
+        componentVisibleListener.onErrorFound(true, getString(R.string.no_result));
         ServerRequestManager.setOnRequestCompleteListener(this);
         return view;
     }
