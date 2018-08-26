@@ -14,7 +14,6 @@
     </string-array>
 
     <string-array name="themes">
-        <item>Default</item>
         <item>Light Theme</item>
         <item>Black Theme</item>
     </string-array>

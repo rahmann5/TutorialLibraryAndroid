@@ -36,7 +36,7 @@
     </style>
 
     <style name="page_background_dark">
-        <item name="android:background">@drawable/about_gradient</item>
+        <item name="android:background">@drawable/black_gray_gradient_background</item>
     </style>
 
     <style name="text_regular_def">
