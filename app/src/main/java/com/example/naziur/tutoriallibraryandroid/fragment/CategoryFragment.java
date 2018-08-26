@@ -123,6 +123,7 @@ public class CategoryFragment extends MainFragment implements ServerRequestManag
     public void onSuccessfulRequestListener(String command, String... s) {
         switch (command) {
             case ServerRequestManager.COMMAND_All_TAGS :
+                categoryAdapter.clear();
                 categoryAdapter.setCategoryData(loadCategoriesData(s));
                 componentVisibleListener.onErrorFound(false, "");
                 break;

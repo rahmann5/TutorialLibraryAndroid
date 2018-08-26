@@ -67,7 +67,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        style="?pageBackground"
         android:scrollbars="none"
         app:behavior_overlapTop="30dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -185,16 +185,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
+                        style="?textSubheader"
                         android:text="@string/aims_abt"
-                        android:layout_gravity="center_vertical"
-                        android:textSize="25sp"/>
+                        android:layout_gravity="center_vertical" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    style="?textRegular"
                     android:id="@+id/aims_contents"
                     android:layout_below="@id/title_card1"
                     />
@@ -229,9 +228,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/web_abt"
-                            android:textColor="@color/white"
+                            style="?textSubheader"
                             android:layout_gravity="center_vertical"
-                            android:textSize="25sp"/>
+                            />
                     </LinearLayout>
 
                     <WebView
@@ -271,9 +270,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/auth_abt"
-                            android:textColor="@color/white"
+                            style="?textSubheader"
                             android:layout_gravity="center_vertical"
-                            android:textSize="25sp"/>
+                            />
                     </LinearLayout>
 
                     <WebView

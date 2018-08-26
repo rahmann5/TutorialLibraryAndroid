@@ -72,6 +72,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return categoryModel.getType();
     }
 
+    public void clear(){
+        categoryData = new ArrayList<>();
+    }
+
     @Override
     public int getItemCount() {
         return categoryData.size();
