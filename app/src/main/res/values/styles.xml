@@ -78,6 +78,14 @@
         <item name="android:background">@android:drawable/dialog_holo_dark_frame</item>
     </style>
 
+    <style name="section_bg_def">
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="section_bg_dark">
+        <item name="android:background">@android:color/black</item>
+    </style>
+
     <style name="button_def" >
         <item name="android:background">@android:color/background_dark</item>
         <item name="android:textColor">@android:color/white</item>
@@ -92,6 +100,11 @@
 
     <style name="spinner_def">
         <item name="android:background">@drawable/spinner_wh_background</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="spinner_dark" parent="spinner_def">
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <color name="actionbar_bg_wh">#AFAFAF</color>

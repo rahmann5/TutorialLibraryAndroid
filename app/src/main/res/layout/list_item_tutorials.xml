@@ -11,7 +11,9 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="?contrast">
+            style="?section"
+            >
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -19,7 +21,6 @@
                 android:id="@+id/title_tv"
                 android:textAlignment="center"
                 android:textSize="24sp"
-                android:background="@color/tutorial_title_bg"
                 style="?textSubheader"
                 />
 

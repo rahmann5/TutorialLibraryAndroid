@@ -8,6 +8,7 @@
     <attr name="spinner" format="reference" />
     <attr name="button" format="reference" />
     <attr name="contrast" format="reference" />
+    <attr name="section" format="reference" />
 
 
 </resources>

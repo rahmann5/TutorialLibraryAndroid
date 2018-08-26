@@ -67,7 +67,7 @@ public class TutorialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public void clear() {
         final int size = tutorialModels.size();
-        tutorialModels.clear();
+        tutorialModels = new ArrayList<>();
         notifyItemRangeRemoved(0, size);
     }
 
