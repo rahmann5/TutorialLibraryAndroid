@@ -5,6 +5,7 @@
         <item name="pageBackground">@style/page_background_def</item>
         <item name="textSubheader">@style/text_subheader_def</item>
         <item name="textRegular">@style/text_regular_def</item>
+        <item name="textMed">@style/text_medium_def</item>
         <item name="button">@style/button_def</item>
         <item name="spinner">@style/spinner_def</item>
         <item name="actionBarStyle">@style/action_bar_wh</item>
@@ -14,6 +15,7 @@
         <item name="pageBackground">@style/page_background_dark</item>
         <item name="textSubheader">@style/text_subheader_dark</item>
         <item name="textRegular">@style/text_regular_dark</item>
+        <item name="textMed">@style/text_medium_dark</item>
         <item name="button">@style/button_dark</item>
         <item name="spinner">@style/spinner_def</item>
         <item name="actionBarStyle">@style/action_bar_wh</item>

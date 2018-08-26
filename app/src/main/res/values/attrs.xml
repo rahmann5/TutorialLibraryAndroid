@@ -4,6 +4,7 @@
     <attr name="pageBackground" format="reference" />
     <attr name="textSubheader" format="reference" />
     <attr name="textRegular" format="reference" />
+    <attr name="textMed" format="reference" />
     <attr name="spinner" format="reference" />
     <attr name="button" format="reference" />
 
