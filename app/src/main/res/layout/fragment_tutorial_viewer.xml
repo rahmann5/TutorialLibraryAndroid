@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             card_view:cardElevation="4sp"
-            card_view:cardUseCompatPadding="true">
+            card_view:cardUseCompatPadding="true"
+            style="?contrast">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,7 +50,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="By: test"
-                            style="?textRegular"
+                            style="?textMed"
                             android:gravity="center_vertical"/>
 
                     </LinearLayout>
@@ -60,7 +61,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.5"
                         android:text="13 Feb 2018"
-                        style="?textRegular"
+                        style="?textMed"
                         android:gravity="center_vertical|end"/>
                 </LinearLayout>
 
@@ -107,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/tags_text"
-                    style="?textRegular"
+                    style="?textMed"
                     android:layout_marginBottom="5dp"
                     android:padding="5dp"
                     android:background="@color/tutorial_viewer_bg"
@@ -142,7 +143,7 @@
                    android:layout_height="wrap_content"
                    android:text="@string/ref"
                    android:layout_marginBottom="5dp"
-                   style="?textRegular"
+                   style="?textMed"
                    android:padding="5dp"
                    android:background="@color/tutorial_viewer_bg"
                    />
@@ -169,8 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/online"
-                style="?button"
-                android:background="?attr/selectableItemBackground"/>
+                style="?button" />
 
         </android.support.v7.widget.CardView>
 
