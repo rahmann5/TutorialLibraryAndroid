@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="Android"
         android:id="@+id/categoryName"
-        android:textSize="20sp"
+        style="?textRegular"
         android:padding="5dp"
         android:paddingStart="10dp"/>
 

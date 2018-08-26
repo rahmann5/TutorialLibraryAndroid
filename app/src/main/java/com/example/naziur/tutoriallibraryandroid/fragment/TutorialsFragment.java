@@ -114,6 +114,7 @@ public class TutorialsFragment extends MainFragment implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<List<TutorialModel>> loader, List<TutorialModel> data) {
+        tutorialAdapter.clear();
         tutorialAdapter.setTutorialModels(data);
         tutorialAdapter.notifyDataSetChanged();
     }
