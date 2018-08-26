@@ -113,6 +113,7 @@ public class SettingsFragment extends MainFragment{
 
         return v;
     }
+    
 
     private void setNewLocale(String language) {
         LocaleManager.setNewLocale(getActivity(), language);

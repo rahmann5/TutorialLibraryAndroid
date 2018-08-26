@@ -66,6 +66,10 @@
         <item name="android:background">@android:drawable/dialog_holo_light_frame</item>
     </style>
 
+    <style name="black_background_wh">
+        <item name="android:background">@android:drawable/dialog_holo_dark_frame</item>
+    </style>
+
     <style name="button_def" >
         <item name="android:background">@android:color/background_dark</item>
         <item name="android:textColor">@android:color/white</item>

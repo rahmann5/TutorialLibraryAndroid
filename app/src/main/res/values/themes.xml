@@ -7,6 +7,7 @@
         <item name="textRegular">@style/text_regular_def</item>
         <item name="button">@style/button_def</item>
         <item name="spinner">@style/spinner_def</item>
+        <item name="contrast">@style/white_background_wh</item>
         <item name="actionBarStyle">@style/action_bar_wh</item>
     </style>
 
@@ -16,6 +17,7 @@
         <item name="textRegular">@style/text_regular_dark</item>
         <item name="button">@style/button_dark</item>
         <item name="spinner">@style/spinner_def</item>
+        <item name="contrast">@style/black_background_wh</item>
         <item name="actionBarStyle">@style/action_bar_wh</item>
     </style>
 
