@@ -46,7 +46,15 @@
 
     <style name="text_regular_dark" parent = "text_regular_def">
         <item name="android:textColor">@android:color/background_light</item>
-        <item name="android:textSize">@dimen/text_regular_text_size</item>
+    </style>
+
+    <style name="text_medium_def" >
+        <item name="android:textColor">@android:color/background_dark</item>
+        <item name="android:textSize">@dimen/text_medium_text_size</item>
+    </style>
+
+    <style name="text_medium_dark" parent="text_medium_def">
+        <item name="android:textColor">@android:color/background_light</item>
     </style>
 
     <style name="text_subheader_def">
