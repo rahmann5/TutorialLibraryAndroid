@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardElevation="4sp"
-    card_view:cardUseCompatPadding="true"
-    style="?contrast">
+    card_view:cardUseCompatPadding="true">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        style="?section">
 
         <TextView
             android:id="@+id/section_heading"
