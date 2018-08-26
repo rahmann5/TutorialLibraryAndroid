@@ -41,4 +41,6 @@
     <string name="array_tag">Etiqueta</string>
     <string name="array_title">Título</string>
     <string name="language_warning_settings">Advertencia: cambiar el idioma reiniciará la aplicación.</string>
+    <string name="no_result">No hay resultados...</string>
+    <string name="theme_settings">Cambiar de tema:</string>
 </resources>

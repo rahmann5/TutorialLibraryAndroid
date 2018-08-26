@@ -14,11 +14,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text="@string/array_title"
                 android:id="@+id/title_tv"
                 android:textAlignment="center"
                 android:textSize="24sp"
-                android:background="@color/tutorial_title_bg"/>
+                android:background="@color/tutorial_title_bg"
+                style="?textSubheader"
+                />
 
             <ImageView
                 android:id="@+id/intro_image"
@@ -31,8 +33,7 @@
                 android:id="@+id/intro_wv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="This is a test intro that I will use only for testing an it should be removed swifty after this"/>
+                android:textAlignment="center" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tags_text"
+                    style="?textRegular"
                     />
 
             </LinearLayout>
@@ -60,6 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Posted: 08/07/2018"
+                    style="?textRegular"
                     android:layout_marginRight="4dp"
                     android:layout_alignBottom="@+id/view_tut_btn"
                     android:layout_alignParentStart="true"
@@ -68,8 +71,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/tags_text_colour"
-                    android:background="@color/tutorial_view_btn_bg"
+                    style="?button"
                     android:text="@string/view_tut"
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="4dp"

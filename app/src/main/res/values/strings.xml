@@ -59,11 +59,13 @@
     <!-- fragment: settings  -->
     <string name="language_settings">Current Language:</string>
     <string name="language_warning_settings">Warning: changing the language will restart the application.</string>
+    <string name="theme_settings">Change Theme:</string>
 
     <!-- fragment: search  -->
     <string name="no_tutorials_found">No Tutorials Found</string>
     <string name="tags_text">Tags:</string>
     <string name="search_hint">Search here...</string>
+    <string name="no_result">No Results...</string>
     <string name="array_title">Title</string>
     <string name="array_tag">Tag</string>
     <string name="array_auth">Author</string>

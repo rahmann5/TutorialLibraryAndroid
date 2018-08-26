@@ -41,4 +41,6 @@
     <string name="web_abt">Webseite</string>
     <string name="website_html"><![CDATA[Besuchen Sie uns auf unserer Website: <a href = \'https://tutoriallibrary.000webhostapp.com/\'>tutoriallibrary</a>]]></string>
     <string name="feedback_later">Später</string>
+    <string name="no_result">Keine Ergebnisse...</string>
+    <string name="theme_settings">Thema ändern:</string>
 </resources>

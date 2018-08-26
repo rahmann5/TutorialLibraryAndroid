@@ -14,8 +14,7 @@
         android:text="A"
         android:background="@drawable/ic_favorite"
         android:gravity="center"
-        android:textColor="@color/list_item_bck_1"
-        android:textSize="15sp"
+        style="?textSubheader"
         android:textStyle="bold"/>
 
     <LinearLayout
@@ -30,14 +29,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tutorial Name"
-            android:textSize="18sp"/>
+            style="?textSubheader"/>
 
         <TextView
             android:id="@+id/tutorial_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="By: Author"
-            android:textSize="15sp"/>
+            style="?textRegular"/>
 
     </LinearLayout>
 
